@@ -1,6 +1,6 @@
 # RISE-SPEC — Is AI-ECG "early detection" target-specific within the same patient?
 
-Status: concept / pre-registration draft · v1.4 · 2026-10-30 (change log: §11)
+Status: concept / pre-registration draft · v1.5 · 2026-10-30 (change log: §11)
 Scope rule: minimum design that answers one question. Anything not listed here goes to §9 and needs an explicit decision before it is added.
 
 ## 1. Thesis
@@ -167,6 +167,7 @@ These were designed after the results were seen, in a critical review of the des
 - **R1 — lag (diagnostic-suspicion check):** drop ECGs from the last 12 months before the anchor (keep t ≤ −1 y) and refit the primary model. Rationale: an LVSD diagnosis can be triggered by the same ECG changes the model reads, which would inflate the LVSD slope near the anchor; R1 also reduces the effect of LVSD ECGs being somewhat closer to the anchor (share of ECGs in the last 12 months: LVSD 37%, AF 34%, LIMBFX 29% in MIMIC).
 - **R2 — symmetric exclusions:** also exclude AF and LIMBFX patients with an HF or cardiomyopathy code before the anchor (I50.x, I42.x, 428.x, 425.x), which §6.2 applied to the LVSD group only (MIMIC: 14.8% of AF and 12.5% of LIMBFX patients).
 - **R3 — event-free reference group (REF):** patients with no code from the LVSD, AF or LIMBFX sets and no HF or cardiomyopathy code at any time; a pseudo-anchor at the date of one of their ECGs chosen at random (seed 20261030), so that, like the event groups, they have an ECG at the anchor; then the §6.3 window and ECG rules (≥2 eligible ECGs spanning ≥180 days, age ≥18; in HEEDB also ≥1 code ≥365 days before the anchor). A random sample of 2,000 entering patients in MIMIC and 2,000 per HEEDB site. REF is added as a fourth group to the primary model; reported: β_REF and the contrasts LVSD−REF, AF−REF and LIMBFX−REF with their classes. Reading: if AF−REF and LIMBFX−REF are `≡`, the comparators' rise is a time trend shared with event-free patients rather than a pre-event change, and message 2 is worded accordingly.
+- **R4 — ECGs taken while LVEF was documented normal (prediction vs detection; specified 30 Oct 2026 after R1–R3, before running it):** in the echo-anchored LVSD group (S4, MIMIC only), keep only ECGs dated on or before the patient's last TTE with LVEF >45% before the anchor (same LVEF rules as S4), and only patients with ≥2 such ECGs spanning ≥180 days (162 patients, 1,250 ECGs by count; median 1.4 years from that echo to the first LVEF ≤45%). Comparators as in S4 (AF and LIMBFX, all window ECGs) plus REF (R3). Both models; same Δ and classes. Reported: LVSD−AF, LVSD−LIMBFX and LVSD−REF. Reading: `>` = the score already rises while LVEF is documented normal (prediction); `≡` = no meaningful rise before LVEF falls (the pre-diagnostic signal reflects detection of existing dysfunction); `?` = inconclusive. Expected to be underpowered.
 
 ## 7. Work packages and gates
 
@@ -219,6 +220,9 @@ These were designed after the results were seen, in a critical review of the des
 - [x] Coverage: by approximate real year, ECGs end around 2019 while admissions run to about 2022; anchors after the ECG period would keep only early-window ECGs. Rule adopted: ≥1 ECG at the anchor admission (§6.2), rather than a calendar cut-off, which is only accurate to about ±1 year. Decided 30 Oct 2026.
 
 ## 11. Change log
+
+v1.5 (30 Oct 2026) — R4 plan, before running it
+- §6.9: R4 (documented-normal-LVEF ECGs) added (post hoc).
 
 v1.4 (30 Oct 2026) — post hoc robustness done
 - §7: R1–R3 results recorded.
