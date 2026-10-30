@@ -39,7 +39,7 @@ BIN_MID_Y = {"m60_36": -4.0, "m36_24": -2.5, "m24_12": -1.5, "m12_6": -0.75, "m6
 
 INK, INK2, MUTED, GRID, AXIS = "#0b0b0b", "#52514e", "#898781", "#e1e0d9", "#c3c2b7"
 SERIES = {"LVSD": ("LVSD", "#2a78d6", "o"), "AF": ("AF", "#eb6834", "s"),
-          "CTRL": ("Limb fracture", "#1baf7a", "^"), "REFD": ("No event (random date)", MUTED, "D")}
+          "CTRL": ("Limb fracture", "#1baf7a", "^"), "REFD": ("No event (random date)", "#6b6a66", "D")}  # darker than MUTED: CVD-separable from aqua (dataviz validator)
 DODGE = {"LVSD": -0.06, "AF": -0.02, "CTRL": 0.02, "REFD": 0.06}
 plt.rcParams.update({"font.family": "Liberation Sans", "font.size": 8, "xtick.labelsize": 7, "ytick.labelsize": 7,
                      "legend.fontsize": 7, "pdf.fonttype": 42, "axes.edgecolor": AXIS, "axes.linewidth": 0.8,

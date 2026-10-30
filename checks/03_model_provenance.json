@@ -1,0 +1,24 @@
+{
+  "echonext_mini": {
+    "repository": {
+      "commit": "15233e9392e9dc10c136a5624abf10199207bce9",
+      "date": "2026-04-20",
+      "remote": "https://github.com/PierreElias/IntroECG.git"
+    },
+    "weights": "7-EchoNext Minimodel/models/echonext_multilabel_minimodel/weights.pt",
+    "weights_sha256": "aac57aad0ec9763021c6264e89c74e3d78f8b711159b1880e5bd4515d5e21cd6",
+    "license_files": null
+  },
+  "deepecg_sl": {
+    "hf_repo": "heartwise/deepecg-sl_finetuned_LVEF_MHI",
+    "hf_revision": "1ee6698a37599e4e9ea0ba4c1a5baa010f0da436",
+    "weights": "LVEF_MSE_SL.pt",
+    "weights_sha256": "cc46c6e95f7e9e138f1460747ce3545db9e932a2431963bd478561b65f4926b7",
+    "license": "apache-2.0",
+    "preprocessing_repository": {
+      "commit": "c81d677510f3e7ef6f1ce7c42147c7a5a8884f37",
+      "date": "2026-10-29",
+      "remote": "https://github.com/HeartWise-AI/DeepECG_Docker.git"
+    }
+  }
+}
