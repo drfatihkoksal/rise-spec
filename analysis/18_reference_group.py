@@ -41,14 +41,14 @@ def _mod(name, path):
     return m
 
 
-C1 = _mod("cohort", PROJ / "analysis/01_cohort.py")
-SCORE = _mod("score", PROJ / "analysis/02_score.py")
-AN = _mod("analysis3", PROJ / "analysis/03_analysis.py")
-COH = _mod("heedb_cohort", PROJ / "analysis/11_heedb_cohort.py")
-HS = _mod("heedb_score", PROJ / "analysis/12_heedb_score.py")
-H = _mod("heedb_analysis", PROJ / "analysis/13_heedb_analysis.py")
+# The analysis modules load each other (and re-execute) by name. Load the ones that pull in dependencies first,
+# then use the single copy finally registered in sys.modules, so that functions sent to worker processes are
+# the registered ones (pickling refers to them by module name).
+HS = _mod("heedb_score", PROJ / "analysis/12_heedb_score.py")        # loads score (and cohort), heedb_cohort
+D16 = _mod("deepecg_analysis", PROJ / "analysis/16_deepecg_analysis.py")  # loads analysis3, heedb_analysis
 D15 = _mod("deepecg_score", PROJ / "analysis/15_deepecg_score.py")
-D16 = _mod("deepecg_analysis", PROJ / "analysis/16_deepecg_analysis.py")
+SCORE, C1, COH = sys.modules["score"], sys.modules["cohort"], sys.modules["heedb_cohort"]
+AN, H = sys.modules["analysis3"], sys.modules["heedb_analysis"]
 
 
 def entry(win, key):
