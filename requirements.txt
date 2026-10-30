@@ -1,0 +1,12 @@
+# Python 3.13; versions used for the published results
+numpy==2.4.6
+pandas==2.3.3
+pyarrow==24.0.0
+duckdb==1.5.4
+statsmodels==0.14.6
+scipy==1.17.1
+scikit-learn==1.9.0
+torch==2.11.0
+wfdb==4.3.1
+neurokit2==0.2.13
+matplotlib==3.10.9

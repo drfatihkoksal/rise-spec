@@ -1,0 +1,17 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the article and this software release."
+title: "RISE-SPEC: within-patient AI-ECG trajectories before left ventricular systolic dysfunction (analysis code)"
+version: 1.0.0
+date-released: 2026-10-30
+license: MIT
+authors:
+  - family-names: "Köksal"
+    given-names: "Fatih"
+    orcid: "https://orcid.org/0000-0002-4197-4683"
+    affiliation: "Department of Cardiology, University of Health Sciences, Bursa Yüksek İhtisas Training and Research Hospital, Bursa, Türkiye"
+keywords:
+  - artificial intelligence
+  - electrocardiography
+  - left ventricular dysfunction
+  - MIMIC-IV
+  - Harvard-Emory ECG Database
