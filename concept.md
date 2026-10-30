@@ -1,6 +1,6 @@
 # RISE-SPEC — Is AI-ECG "early detection" target-specific within the same patient?
 
-Status: concept / pre-registration draft · v1.5 · 2026-10-30 (change log: §11)
+Status: concept / pre-registration draft · v1.6 · 2026-10-30 (change log: §11)
 Scope rule: minimum design that answers one question. Anything not listed here goes to §9 and needs an explicit decision before it is added.
 
 ## 1. Thesis
@@ -182,6 +182,7 @@ These were designed after the results were seen, in a critical review of the des
   **WP3 result (30 Oct 2026, `analysis/03_analysis.py` → `results/wp3_results.json`):** readout rule 1 in the primary analysis and in S1–S4. Numbers are read from the results file, not copied here.
 
 - **Post hoc R1–R3 (§6.9) results (30 Oct 2026, `results/robustness_r1_r2.json`, `results/robustness_r3.json`):** R2 (symmetric exclusions): rule 1 for both models in both sources. R1 (last 12 months dropped): rule 5 in all four, with positive but about halved LVSD contrasts. R3 (event-free reference): the reference group's score also rises; AF−REF and LIMBFX−REF are `≡` in all four, LVSD−REF is `>` in all four.
+- **Post hoc R4 result (30 Oct 2026, `results/robustness_r4.json`):** 162 patients, 1,250 ECGs taken while LVEF was documented normal (median 2.5 years before the first LVEF ≤45%; LVEF at the last normal echo median 57.5%, IQR 52.5–60). EchoNext-Mini: LVSD−AF, LVSD−LIMBFX and LVSD−REF all `>`. DeepECG-SL: LVSD−REF `>`, LVSD−AF and LVSD−LIMBFX `?` (positive, wide CIs).
 - **WP-D — second model (§6.8):** freeze preprocessing per source → scoring (G2-D) → MIMIC and HEEDB analyses.
   **WP-D result (30 Oct 2026, `results/wp_d_g2.json`, `results/wp_d_results.json`):** G2-D pass (AUROC 0.886 MIMIC, 0.829 HEEDB; median predicted LVEF 59.8% and 60.2%); Δ_D = 0.418 points/year. Readout rule 1 in MIMIC and in HEEDB, the same as EchoNext-Mini, and rule 1 in every sensitivity analysis and site.
 - **WP-H — HEEDB replication (§6.7):** data checks → bridge check in MIMIC → cohort (G1-H) → scoring (G2-H) → analysis and replication reading.
@@ -220,6 +221,9 @@ These were designed after the results were seen, in a critical review of the des
 - [x] Coverage: by approximate real year, ECGs end around 2019 while admissions run to about 2022; anchors after the ECG period would keep only early-window ECGs. Rule adopted: ≥1 ECG at the anchor admission (§6.2), rather than a calendar cut-off, which is only accurate to about ±1 year. Decided 30 Oct 2026.
 
 ## 11. Change log
+
+v1.6 (30 Oct 2026) — R4 done
+- §7: R4 result recorded.
 
 v1.5 (30 Oct 2026) — R4 plan, before running it
 - §6.9: R4 (documented-normal-LVEF ECGs) added (post hoc).
