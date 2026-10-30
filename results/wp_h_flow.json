@@ -1,0 +1,218 @@
+{
+  "run_date": "2026-10-30",
+  "window_years": 5,
+  "sites": {
+    "I0001": {
+      "name": "MGH",
+      "first_event_patients": 107873,
+      "ex_multi_set": 2533,
+      "anchor_flow": {
+        "start": {
+          "AF": 63636,
+          "LIMBFX": 27075,
+          "LVSD": 14629
+        },
+        "ex_control_not_initial": {
+          "LIMBFX": 5158
+        },
+        "after_ex_control_not_initial": {
+          "AF": 63636,
+          "LIMBFX": 21917,
+          "LVSD": 14629
+        },
+        "ex_prior_hf_cm": {
+          "LVSD": 5737
+        },
+        "after_ex_prior_hf_cm": {
+          "AF": 63636,
+          "LIMBFX": 21917,
+          "LVSD": 8892
+        },
+        "ex_lvsd_within_1y": {
+          "AF": 4190,
+          "LIMBFX": 274
+        },
+        "after_ex_lvsd_within_1y": {
+          "AF": 59446,
+          "LIMBFX": 21643,
+          "LVSD": 8892
+        },
+        "ex_lookback_lt_1y": {
+          "AF": 47363,
+          "LIMBFX": 15800,
+          "LVSD": 6951
+        },
+        "after_ex_lookback_lt_1y": {
+          "AF": 12083,
+          "LIMBFX": 5843,
+          "LVSD": 1941
+        },
+        "ex_age_or_sex_missing": {
+          "AF": 2234,
+          "LIMBFX": 983,
+          "LVSD": 346
+        },
+        "after_ex_age_or_sex_missing": {
+          "AF": 9849,
+          "LIMBFX": 4860,
+          "LVSD": 1595
+        },
+        "ex_no_ecg_at_anchor": {
+          "AF": 1808,
+          "LIMBFX": 1696,
+          "LVSD": 265
+        },
+        "after_ex_no_ecg_at_anchor": {
+          "AF": 8041,
+          "LIMBFX": 3164,
+          "LVSD": 1330
+        }
+      },
+      "share_window_ecgs_with_12sl_v24": 1.0,
+      "ecg_flow": {
+        "candidates": {
+          "AF": 8041,
+          "LIMBFX": 3164,
+          "LVSD": 1330
+        },
+        "ex_no_window_ecg": {
+          "AF": 143,
+          "LIMBFX": 80,
+          "LVSD": 26
+        },
+        "ex_lt2_eligible_or_span_lt180d": {
+          "AF": 2436,
+          "LIMBFX": 948,
+          "LVSD": 365
+        },
+        "final_patients": {
+          "AF": 5462,
+          "LIMBFX": 2136,
+          "LVSD": 939
+        }
+      }
+    },
+    "I0006": {
+      "name": "Emory",
+      "first_event_patients": 98476,
+      "ex_multi_set": 1812,
+      "anchor_flow": {
+        "start": {
+          "AF": 52082,
+          "LIMBFX": 22906,
+          "LVSD": 21676
+        },
+        "ex_control_not_initial": {
+          "LIMBFX": 594
+        },
+        "after_ex_control_not_initial": {
+          "AF": 52082,
+          "LIMBFX": 22312,
+          "LVSD": 21676
+        },
+        "ex_prior_hf_cm": {
+          "LVSD": 13049
+        },
+        "after_ex_prior_hf_cm": {
+          "AF": 52082,
+          "LIMBFX": 22312,
+          "LVSD": 8627
+        },
+        "ex_lvsd_within_1y": {
+          "AF": 4989,
+          "LIMBFX": 369
+        },
+        "after_ex_lvsd_within_1y": {
+          "AF": 47093,
+          "LIMBFX": 21943,
+          "LVSD": 8627
+        },
+        "ex_lookback_lt_1y": {
+          "AF": 18884,
+          "LIMBFX": 4779,
+          "LVSD": 3560
+        },
+        "after_ex_lookback_lt_1y": {
+          "AF": 28209,
+          "LIMBFX": 17164,
+          "LVSD": 5067
+        },
+        "ex_age_or_sex_missing": {
+          "AF": 2490,
+          "LIMBFX": 1394,
+          "LVSD": 227
+        },
+        "after_ex_age_or_sex_missing": {
+          "AF": 25719,
+          "LIMBFX": 15770,
+          "LVSD": 4840
+        },
+        "ex_no_ecg_at_anchor": {
+          "AF": 15418,
+          "LIMBFX": 14321,
+          "LVSD": 2767
+        },
+        "after_ex_no_ecg_at_anchor": {
+          "AF": 10301,
+          "LIMBFX": 1449,
+          "LVSD": 2073
+        }
+      },
+      "share_window_ecgs_with_12sl_v24": 0.9685,
+      "ecg_flow": {
+        "candidates": {
+          "AF": 10301,
+          "LIMBFX": 1449,
+          "LVSD": 2073
+        },
+        "ex_no_window_ecg": {
+          "AF": 6587,
+          "LIMBFX": 875,
+          "LVSD": 1368
+        },
+        "ex_lt2_eligible_or_span_lt180d": {
+          "AF": 2310,
+          "LIMBFX": 353,
+          "LVSD": 467
+        },
+        "final_patients": {
+          "AF": 1404,
+          "LIMBFX": 221,
+          "LVSD": 238
+        }
+      }
+    }
+  },
+  "pooled_final_patients": {
+    "AF": 6866,
+    "LIMBFX": 2357,
+    "LVSD": 1177
+  },
+  "pooled_ecgs": {
+    "AF": 54631,
+    "LIMBFX": 24114,
+    "LVSD": 12676
+  },
+  "share_conduction_statement": {
+    "AF": 0.122,
+    "LIMBFX": 0.062,
+    "LVSD": 0.173
+  },
+  "g2_sample": {
+    "n": 199939,
+    "dropped_waveform_check": 61,
+    "by_site": {
+      "I0001": 99997,
+      "I0006": 99942
+    }
+  },
+  "G1_H": {
+    "threshold": 500,
+    "counts": {
+      "LVSD": 1177,
+      "AF": 6866,
+      "LIMBFX": 2357
+    },
+    "pass": true
+  }
+}

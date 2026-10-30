@@ -159,6 +159,8 @@ Adaptations, each forced by the data:
   **WP3 result (30 Oct 2026, `analysis/03_analysis.py` → `results/wp3_results.json`):** readout rule 1 in the primary analysis and in S1–S4. Numbers are read from the results file, not copied here.
 
 - **WP-H — HEEDB replication (§6.7):** data checks → bridge check in MIMIC → cohort (G1-H) → scoring (G2-H) → analysis and replication reading.
+  **Bridge result (30 Oct 2026, `results/wp_h_bridge.json`):** with PR, QRS and QTc held constant, the MIMIC readout is still rule 1 in the primary model, S2 and S3, so HEEDB results are comparable with the MIMIC score.
+  **G1-H result (30 Oct 2026, `results/wp_h_flow.json`):** pooled LVSD 1,177, AF 6,866, LIMBFX 2,357 (pass).
 
 ## 8. Limitations accepted up front
 
