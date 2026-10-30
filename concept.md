@@ -1,6 +1,6 @@
 # RISE-SPEC — Is AI-ECG "early detection" target-specific within the same patient?
 
-Status: concept / pre-registration draft · v1.9 · 2026-10-30 (change log: §11)
+Status: concept / pre-registration draft · v2.0 · 2026-10-30 (change log: §11)
 Scope rule: minimum design that answers one question. Anything not listed here goes to §9 and needs an explicit decision before it is added.
 
 ## 1. Thesis
@@ -186,6 +186,7 @@ These were designed after the results were seen, in a critical review of the des
 - **Post hoc R1–R3 (§6.9) results (30 Oct 2026, `results/robustness_r1_r2.json`, `results/robustness_r3.json`):** R2 (symmetric exclusions): rule 1 for both models in both sources. R1 (last 12 months dropped): rule 5 in all four, with positive but about halved LVSD contrasts. R3 (event-free reference): the reference group's score also rises; AF−REF and LIMBFX−REF are `≡` in all four, LVSD−REF is `>` in all four.
 - **Post hoc R4 result (30 Oct 2026, `results/robustness_r4.json`):** 162 patients, 1,250 ECGs taken while LVEF was documented normal (median 2.5 years before the first LVEF ≤45%; LVEF at the last normal echo median 57.5%, IQR 52.5–60). EchoNext-Mini: LVSD−AF, LVSD−LIMBFX and LVSD−REF all `>`. DeepECG-SL: LVSD−REF `>`, LVSD−AF and LVSD−LIMBFX `?` (positive, wide CIs).
 - **Exploratory R5 result (30 Oct 2026, `results/robustness_r5.json`):** in event-free patients the within-patient drift is 4.8 (MIMIC; bootstrap 95% CI 3.1–6.8) and 6.4 (HEEDB; 4.4–9.4) times the cross-sectional age gradient for EchoNext-Mini; for DeepECG-SL the cross-sectional age gradient is about zero, so ageing explains little of the drift. Caveats: survivors free of all event codes flatten the cross-sectional gradient, and the REF pseudo-anchor is itself an ECG encounter.
+- **Exploratory R6 result (30 Oct 2026, `results/robustness_r6.json`):** with a random-date pseudo-anchor the event-free drift is smaller than with an ECG-date anchor: EchoNext-Mini β_REF-D 0.020 (MIMIC) and 0.024 (HEEDB) against 0.054 and 0.049 (REF-D − REF −0.034 and −0.025, 95% CIs excluding 0, class `≡`); DeepECG-SL β_REF-D 0.027 and 0.040 with CIs including 0. LVSD − REF-D is `>` in all four. Part of the R3 drift is therefore a change before a health-care encounter; a small residual drift remains for EchoNext-Mini.
 - **WP-D — second model (§6.8):** freeze preprocessing per source → scoring (G2-D) → MIMIC and HEEDB analyses.
   **WP-D result (30 Oct 2026, `results/wp_d_g2.json`, `results/wp_d_results.json`):** G2-D pass (AUROC 0.886 MIMIC, 0.829 HEEDB; median predicted LVEF 59.8% and 60.2%); Δ_D = 0.418 points/year. Readout rule 1 in MIMIC and in HEEDB, the same as EchoNext-Mini, and rule 1 in every sensitivity analysis and site.
 - **WP-H — HEEDB replication (§6.7):** data checks → bridge check in MIMIC → cohort (G1-H) → scoring (G2-H) → analysis and replication reading.
@@ -224,6 +225,9 @@ These were designed after the results were seen, in a critical review of the des
 - [x] Coverage: by approximate real year, ECGs end around 2019 while admissions run to about 2022; anchors after the ECG period would keep only early-window ECGs. Rule adopted: ≥1 ECG at the anchor admission (§6.2), rather than a calendar cut-off, which is only accurate to about ±1 year. Decided 30 Oct 2026.
 
 ## 11. Change log
+
+v2.0 (30 Oct 2026) — R6 done
+- §7: R6 result recorded.
 
 v1.9 (30 Oct 2026) — R6 plan, before running it
 - §6.9: R6 (random-date pseudo-anchor, exploratory).
