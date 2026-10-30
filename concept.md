@@ -1,6 +1,6 @@
 # RISE-SPEC — Is AI-ECG "early detection" target-specific within the same patient?
 
-Status: concept / pre-registration draft · v1.1 · 2026-10-30 (change log: §11)
+Status: concept / pre-registration draft · v1.2 · 2026-10-30 (change log: §11)
 Scope rule: minimum design that answers one question. Anything not listed here goes to §9 and needs an explicit decision before it is added.
 
 ## 1. Thesis
@@ -173,6 +173,7 @@ Purpose: a pre-specified secondary analysis of whether the result is specific to
   **WP3 result (30 Oct 2026, `analysis/03_analysis.py` → `results/wp3_results.json`):** readout rule 1 in the primary analysis and in S1–S4. Numbers are read from the results file, not copied here.
 
 - **WP-D — second model (§6.8):** freeze preprocessing per source → scoring (G2-D) → MIMIC and HEEDB analyses.
+  **WP-D result (30 Oct 2026, `results/wp_d_g2.json`, `results/wp_d_results.json`):** G2-D pass (AUROC 0.886 MIMIC, 0.829 HEEDB; median predicted LVEF 59.8% and 60.2%); Δ_D = 0.418 points/year. Readout rule 1 in MIMIC and in HEEDB, the same as EchoNext-Mini, and rule 1 in every sensitivity analysis and site.
 - **WP-H — HEEDB replication (§6.7):** data checks → bridge check in MIMIC → cohort (G1-H) → scoring (G2-H) → analysis and replication reading.
   **Bridge result (30 Oct 2026, `results/wp_h_bridge.json`):** with PR, QRS and QTc held constant, the MIMIC readout is still rule 1 in the primary model, S2 and S3, so HEEDB results are comparable with the MIMIC score.
   **G1-H result (30 Oct 2026, `results/wp_h_flow.json`):** pooled LVSD 1,177, AF 6,866, LIMBFX 2,357 (pass).
@@ -209,6 +210,9 @@ Purpose: a pre-specified secondary analysis of whether the result is specific to
 - [x] Coverage: by approximate real year, ECGs end around 2019 while admissions run to about 2022; anchors after the ECG period would keep only early-window ECGs. Rule adopted: ≥1 ECG at the anchor admission (§6.2), rather than a calendar cut-off, which is only accurate to about ±1 year. Decided 30 Oct 2026.
 
 ## 11. Change log
+
+v1.2 (30 Oct 2026) — second model done
+- §7: WP-D result recorded.
 
 v1.1 (30 Oct 2026) — second-model protocol, before any DeepECG score
 - §6.8, §7, §8: DeepECG-SL LVEF regression added as a pre-specified secondary model.
