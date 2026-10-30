@@ -1,6 +1,6 @@
 # RISE-SPEC — Is AI-ECG "early detection" target-specific within the same patient?
 
-Status: concept / pre-registration draft · v1.0 · 2026-10-30 (change log: §11)
+Status: concept / pre-registration draft · v1.1 · 2026-10-30 (change log: §11)
 Scope rule: minimum design that answers one question. Anything not listed here goes to §9 and needs an explicit decision before it is added.
 
 ## 1. Thesis
@@ -146,6 +146,20 @@ Adaptations, each forced by the data:
 11. **Analysis:** both sites pooled, entity = site × patient; per-site estimates are reported descriptively.
 12. **Replication reading:** the replication agrees if its primary readout rule equals the MIMIC rule (rule 1); any other rule is reported as a discordant replication.
 
+### 6.8 Second model: DeepECG-SL LVEF regression (written 30 Oct 2026, before any DeepECG score was computed)
+
+Purpose: a pre-specified secondary analysis of whether the result is specific to EchoNext-Mini. EchoNext-Mini stays the primary model.
+
+- **Model:** `heartwise/deepecg-sl_finetuned_LVEF_MHI` (Apache-2.0; per its card fine-tuned on Montreal Heart Institute data only, so external to both MIMIC and HEEDB), predicted LVEF in %. Load check: `results/deepecg_load_check.json` (strict load; MBConv expansion 2; MHI validation MAE 7.6 points, r = 0.68). The general LVEF ≤40% classifier is not used, because its training data are undocumented and may include MIMIC-IV.
+- **Score:** −(predicted LVEF), so that higher is worse; analysis scale = LVEF points; no logit.
+- **Input:** the recorded 12 leads by name (I, II, III, aVR, aVL, aVF, V1–V6), 500 Hz decimated by taking every second sample, 250 Hz used as recorded; no tabular input.
+- **Preprocessing (DeepECG_Docker c81d677, `utils/ecg_signal_processor.py`, ported):** global spectral scaling of lead I to the PTB-XL power ratio (3.003154), then line-noise flattening (peaks above 20 Hz in the mean lead I spectrum, window 5 Hz, threshold 5 SD; per-lead LOESS crossings widened by 1 Hz), then ×1/0.0048 (`EfficientNetWrapper`). The official pipeline estimates the scale and the frequency ranges per 10,000-ECG batch; here they are estimated once per data source (MIMIC, MGH, Emory) on a fixed random sample of 10,000 ECGs from that source's G2 sample, then frozen and applied to every ECG.
+- **Cohorts:** exactly the EchoNext ECGs: MIMIC primary and S1–S4 (§6.4–6.6), HEEDB primary, S2-H and S3 (§6.7).
+- **G2-D (transport check):** on the existing G2 samples, AUROC of the score for a prevalent LVSD code ≥0.70 in MIMIC and in HEEDB. Plausibility: the median predicted LVEF in the G2 sample lies within 45–70%; if not, the input scale is rechecked once (with and without the 1/0.0048 factor) before any slope is estimated. If G2-D fails, the DeepECG analyses are reported descriptively only.
+- **Margin:** Δ_D = 0.10 × D_G2,D / 3, with D_G2,D from the MIMIC G2 sample on the score scale; the same Δ_D is used in HEEDB.
+- **Readout:** the §4 classes and rules. Reported: the DeepECG rule in each data source, and whether it equals the EchoNext rule.
+- **Difference to state in the paper:** EchoNext-Mini is a classifier trained for LVEF ≤45%; DeepECG-SL predicts continuous LVEF.
+
 ## 7. Work packages and gates
 
 - **WP1 — Cohort & anchors** (DuckDB over MIMIC tables).
@@ -158,6 +172,7 @@ Adaptations, each forced by the data:
 - **WP3 — Analysis:** §6.4 → §6.5 → S1–S4 → §4 readout.
   **WP3 result (30 Oct 2026, `analysis/03_analysis.py` → `results/wp3_results.json`):** readout rule 1 in the primary analysis and in S1–S4. Numbers are read from the results file, not copied here.
 
+- **WP-D — second model (§6.8):** freeze preprocessing per source → scoring (G2-D) → MIMIC and HEEDB analyses.
 - **WP-H — HEEDB replication (§6.7):** data checks → bridge check in MIMIC → cohort (G1-H) → scoring (G2-H) → analysis and replication reading.
   **Bridge result (30 Oct 2026, `results/wp_h_bridge.json`):** with PR, QRS and QTc held constant, the MIMIC readout is still rule 1 in the primary model, S2 and S3, so HEEDB results are comparable with the MIMIC score.
   **G1-H result (30 Oct 2026, `results/wp_h_flow.json`):** pooled LVSD 1,177, AF 6,866, LIMBFX 2,357 (pass).
@@ -171,7 +186,7 @@ Adaptations, each forced by the data:
 - LVSD group composition: the prior-code and multi-code exclusions (§6.2) leave an LVSD group without known AF, although HF and AF often co-occur. Results apply to LVSD without prior or concurrent AF.
 - AF as comparator: subclinical LV dysfunction can precede AF, and atrial remodelling may itself move an LVSD score. A rule-2 reading (L−A `≡`) therefore cannot by itself separate "not LV-specific" from "undiagnosed LVSD in the AF group".
 - Control group: limb fractures replaced hip fracture at G1. More than half of the fracture patients (6,640 of 11,601) had no ECG at the anchor admission and were removed by the coverage rule, so the control group leans towards patients who get ECGs.
-- The study uses one model (EchoNext-Mini, not the full EchoNext model [5]) and one target.
+- The primary model is EchoNext-Mini, not the full EchoNext model [5]; a second, independently trained model (DeepECG-SL, §6.8) is a secondary analysis. One target.
 
 ## 9. Out of scope (do not add without a decision)
 
@@ -194,6 +209,9 @@ Adaptations, each forced by the data:
 - [x] Coverage: by approximate real year, ECGs end around 2019 while admissions run to about 2022; anchors after the ECG period would keep only early-window ECGs. Rule adopted: ≥1 ECG at the anchor admission (§6.2), rather than a calendar cut-off, which is only accurate to about ±1 year. Decided 30 Oct 2026.
 
 ## 11. Change log
+
+v1.1 (30 Oct 2026) — second-model protocol, before any DeepECG score
+- §6.8, §7, §8: DeepECG-SL LVEF regression added as a pre-specified secondary model.
 
 v1.0 (30 Oct 2026) — HEEDB replication done
 - §7: bridge, G1-H, G2-H and replication reading recorded.
