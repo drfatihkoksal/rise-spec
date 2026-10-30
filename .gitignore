@@ -1,0 +1,6 @@
+# Patient-level outputs (PhysioNet DUA): never commit
+work/
+# Third-party code, pinned in analysis/02_score.py (IntroECG commit 15233e9)
+external/
+__pycache__/
+*.log

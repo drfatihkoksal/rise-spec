@@ -1,0 +1,65 @@
+{
+  "run_date": "2026-10-30",
+  "device": "cuda",
+  "echonext_test": {
+    "n": 5442,
+    "auroc": {
+      "lvef_lte_45": 0.8517,
+      "lvwt_gte_13": 0.7343,
+      "aortic_stenosis": 0.8587,
+      "aortic_regurgitation": 0.7396,
+      "mitral_regurgitation": 0.8061,
+      "tricuspid_regurgitation": 0.8334,
+      "pulmonary_regurgitation": 0.8316,
+      "rv_systolic_dysfunction": 0.8663,
+      "pericardial_effusion": 0.7663,
+      "pasp_gte_45": 0.7703,
+      "tr_max_gte_32": 0.7536,
+      "shd": 0.8197
+    },
+    "published_auroc_ref10": {
+      "lvef_lte_45": 0.852,
+      "shd": 0.82
+    }
+  },
+  "tabular_max_abs_diff_vs_released": {
+    "male": 0.0,
+    "age_at_ecg": 0.0,
+    "ventricular_rate": 0.0,
+    "atrial_rate": 0.0,
+    "pr_interval": 0.0,
+    "qrs_duration": 0.0,
+    "qt_corrected": 0.0
+  },
+  "mimic_scale": {
+    "n_ecgs": 1977,
+    "lead_order": [
+      "I",
+      "II",
+      "III",
+      "aVR",
+      "aVL",
+      "aVF",
+      "V1",
+      "V2",
+      "V3",
+      "V4",
+      "V5",
+      "V6"
+    ],
+    "sd_ratio_to_training": [
+      0.916,
+      0.907,
+      1.001,
+      0.886,
+      0.972,
+      0.966,
+      0.966,
+      0.974,
+      0.944,
+      0.938,
+      0.908,
+      0.877
+    ]
+  }
+}

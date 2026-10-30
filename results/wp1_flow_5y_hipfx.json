@@ -1,0 +1,183 @@
+{
+  "run_date": "2026-10-30",
+  "window_years": 5,
+  "control": "HIPFX",
+  "control_codes": [
+    "^S72[012]",
+    "^820"
+  ],
+  "window_end_days_before_anchor": 30,
+  "rules": {
+    "sinus": "\\bsinus (rhythm|bradycardia|tachycardia|arrhythmia)\\b",
+    "non_sinus": "fibrillation|flutter|\\bpac(ed|ing|emaker)\\b|pacemaker|junctional (rhythm|bradycardia|tachycardia|escape)|ectopic atrial|idioventricular|supraventricular (rhythm|tachycardia)|ventricular tachycardia|undetermined rhythm|wandering|\\basystole\\b|a-?v dissociation|escape rhythm|no further analysis",
+    "bad_quality": "unsuitable for analysis|lead reversal",
+    "flat_mV": 0.05,
+    "waveform": "5000x12 samples, no NaN, peak-to-peak >= flat_mV in every lead"
+  },
+  "primary": {
+    "first_event_patients": 44064,
+    "ex_multi_set": 5222,
+    "anchor_flow": {
+      "start": {
+        "AF": 28728,
+        "HIPFX": 2413,
+        "LVSD": 7701
+      },
+      "ex_control_not_initial": {
+        "HIPFX": 54
+      },
+      "after_ex_control_not_initial": {
+        "AF": 28728,
+        "HIPFX": 2359,
+        "LVSD": 7701
+      },
+      "ex_prior_hf_cm": {
+        "LVSD": 1095
+      },
+      "after_ex_prior_hf_cm": {
+        "AF": 28728,
+        "HIPFX": 2359,
+        "LVSD": 6606
+      },
+      "ex_lvsd_within_1y": {
+        "AF": 950,
+        "HIPFX": 22
+      },
+      "after_ex_lvsd_within_1y": {
+        "AF": 27778,
+        "HIPFX": 2337,
+        "LVSD": 6606
+      },
+      "ex_age": {},
+      "after_ex_age": {
+        "AF": 27778,
+        "HIPFX": 2337,
+        "LVSD": 6606
+      },
+      "ex_no_ecg_at_anchor": {
+        "AF": 10049,
+        "HIPFX": 945,
+        "LVSD": 2226
+      },
+      "after_ex_no_ecg_at_anchor": {
+        "AF": 17729,
+        "HIPFX": 1392,
+        "LVSD": 4380
+      }
+    },
+    "ecg_flow": {
+      "candidates": {
+        "AF": 17729,
+        "HIPFX": 1392,
+        "LVSD": 4380
+      },
+      "ex_no_window_ecg": {
+        "AF": 12043,
+        "HIPFX": 864,
+        "LVSD": 2902
+      },
+      "ex_lt2_eligible_or_span_lt180d": {
+        "AF": 3597,
+        "HIPFX": 284,
+        "LVSD": 899
+      },
+      "final_patients": {
+        "AF": 2089,
+        "HIPFX": 244,
+        "LVSD": 579
+      }
+    },
+    "describe": {
+      "AF": {
+        "ecgs": 15095,
+        "median_ecgs_per_patient": 5.0,
+        "median_span_years": 2.313,
+        "share_in_stay": 0.401,
+        "share_qrs_lt120": 0.863
+      },
+      "HIPFX": {
+        "ecgs": 1724,
+        "median_ecgs_per_patient": 4.0,
+        "median_span_years": 2.122,
+        "share_in_stay": 0.537,
+        "share_qrs_lt120": 0.897
+      },
+      "LVSD": {
+        "ecgs": 4334,
+        "median_ecgs_per_patient": 6.0,
+        "median_span_years": 2.321,
+        "share_in_stay": 0.449,
+        "share_qrs_lt120": 0.8
+      }
+    }
+  },
+  "S4": {
+    "tte_studies_with_valid_lvef": 142484,
+    "tte_patients_with_valid_lvef": 73243,
+    "anchor_flow": {
+      "start": {
+        "LVSD_ECHO": 3322
+      },
+      "ex_prior_codes": {
+        "LVSD_ECHO": 1746
+      },
+      "after_ex_prior_codes": {
+        "LVSD_ECHO": 1576
+      },
+      "ex_concurrent_af_control": {
+        "LVSD_ECHO": 332
+      },
+      "after_ex_concurrent_af_control": {
+        "LVSD_ECHO": 1244
+      },
+      "ex_age": {},
+      "after_ex_age": {
+        "LVSD_ECHO": 1244
+      },
+      "ex_no_ecg_at_anchor": {
+        "LVSD_ECHO": 610
+      },
+      "after_ex_no_ecg_at_anchor": {
+        "LVSD_ECHO": 634
+      }
+    },
+    "ecg_flow": {
+      "candidates": {
+        "LVSD_ECHO": 634
+      },
+      "ex_no_window_ecg": {
+        "LVSD_ECHO": 128
+      },
+      "ex_lt2_eligible_or_span_lt180d": {
+        "LVSD_ECHO": 205
+      },
+      "final_patients": {
+        "LVSD_ECHO": 301
+      }
+    },
+    "describe": {
+      "LVSD_ECHO": {
+        "ecgs": 2701,
+        "median_ecgs_per_patient": 7.0,
+        "median_span_years": 2.717,
+        "share_in_stay": 0.482,
+        "share_qrs_lt120": 0.864
+      }
+    }
+  },
+  "window_ecg_counts_all_candidates": {
+    "n_window_ecgs": 39937,
+    "n_sinus": 32454,
+    "n_statement_ok": 31787,
+    "n_eligible": 31712
+  },
+  "G1": {
+    "threshold": 500,
+    "counts": {
+      "LVSD": 579,
+      "AF": 2089,
+      "HIPFX": 244
+    },
+    "pass": false
+  }
+}

@@ -1,0 +1,36 @@
+{
+  "source": "IntroECG 7-EchoNext Minimodel tabular_transformer.joblib (commit 15233e9), sklearn 1.1.3",
+  "features": [
+    "age_at_ecg",
+    "ventricular_rate",
+    "atrial_rate",
+    "pr_interval",
+    "qrs_duration",
+    "qt_corrected"
+  ],
+  "scale_mean": [
+    61.269679199724045,
+    83.37899965505346,
+    89.22718178682304,
+    142.8808416695412,
+    94.80925836495344,
+    452.8796671909926
+  ],
+  "scale_scale": [
+    16.0088291093417,
+    20.38871835899758,
+    44.435355754236824,
+    57.740987114393675,
+    21.872021750684034,
+    40.09147266082739
+  ],
+  "impute_strategy": "median",
+  "impute_statistics_scaled": [
+    0.10808540640028777,
+    -0.11668215790540877,
+    -0.18514945243886324,
+    0.15793215159956217,
+    -0.2198817475482361,
+    -0.09677038366274254
+  ]
+}

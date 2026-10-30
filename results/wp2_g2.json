@@ -1,0 +1,25 @@
+{
+  "run_date": "2026-10-30",
+  "tag": "5y_limbfx",
+  "cohort_scoring": {
+    "ecgs_in": 25259,
+    "dropped_no_measurements": 0,
+    "scored": 25259,
+    "unreadable": 0
+  },
+  "G2": {
+    "n": 151421,
+    "prevalent_lvsd": 6165,
+    "dropped_waveform_check": 333,
+    "dropped_no_measurements": 0,
+    "auroc": 0.8983,
+    "auroc_95ci_bootstrap": [
+      0.8943,
+      0.902
+    ],
+    "threshold": 0.7,
+    "pass": true
+  },
+  "D_G2_logit": 2.1723,
+  "delta_logit_per_year": 0.0724
+}
