@@ -1,6 +1,6 @@
 # RISE-SPEC — Is AI-ECG "early detection" target-specific within the same patient?
 
-Status: concept / pre-registration draft · v1.6 · 2026-10-30 (change log: §11)
+Status: concept / pre-registration draft · v1.7 · 2026-10-30 (change log: §11)
 Scope rule: minimum design that answers one question. Anything not listed here goes to §9 and needs an explicit decision before it is added.
 
 ## 1. Thesis
@@ -168,6 +168,7 @@ These were designed after the results were seen, in a critical review of the des
 - **R2 — symmetric exclusions:** also exclude AF and LIMBFX patients with an HF or cardiomyopathy code before the anchor (I50.x, I42.x, 428.x, 425.x), which §6.2 applied to the LVSD group only (MIMIC: 14.8% of AF and 12.5% of LIMBFX patients).
 - **R3 — event-free reference group (REF):** patients with no code from the LVSD, AF or LIMBFX sets and no HF or cardiomyopathy code at any time; a pseudo-anchor at the date of one of their ECGs chosen at random (seed 20261030), so that, like the event groups, they have an ECG at the anchor; then the §6.3 window and ECG rules (≥2 eligible ECGs spanning ≥180 days, age ≥18; in HEEDB also ≥1 code ≥365 days before the anchor). A random sample of 2,000 entering patients in MIMIC and 2,000 per HEEDB site. REF is added as a fourth group to the primary model; reported: β_REF and the contrasts LVSD−REF, AF−REF and LIMBFX−REF with their classes. Reading: if AF−REF and LIMBFX−REF are `≡`, the comparators' rise is a time trend shared with event-free patients rather than a pre-event change, and message 2 is worded accordingly.
 - **R4 — ECGs taken while LVEF was documented normal (prediction vs detection; specified 30 Oct 2026 after R1–R3, before running it):** in the echo-anchored LVSD group (S4, MIMIC only), keep only ECGs dated on or before the patient's last TTE with LVEF >45% before the anchor (same LVEF rules as S4), and only patients with ≥2 such ECGs spanning ≥180 days (162 patients, 1,250 ECGs by count; median 1.4 years from that echo to the first LVEF ≤45%). Comparators as in S4 (AF and LIMBFX, all window ECGs) plus REF (R3). Both models; same Δ and classes. Reported: LVSD−AF, LVSD−LIMBFX and LVSD−REF. Reading: `>` = the score already rises while LVEF is documented normal (prediction); `≡` = no meaningful rise before LVEF falls (the pre-diagnostic signal reflects detection of existing dysfunction); `?` = inconclusive. Expected to be underpowered.
+- **R5 — how much of the drift is ageing? (exploratory; specified 30 Oct 2026 after R1–R4, before running it):** in the event-free reference group (R3), compare the within-patient drift (fixed-effects slope per year) with the cross-sectional age gradient of the score (one ECG per patient, the first eligible; score on age at that ECG plus sex; per year of age). For EchoNext-Mini the contribution of the model's own age input is removed first (final-layer weight × scaled age), because it is constant within a patient. Ratio within/cross-sectional with a patient bootstrap 95% CI (500 resamples). Reading: ≈1 = drift consistent with ageing; >1 = more than ageing (period, device or selection effects). Within a patient, ageing and calendar time cannot be separated; the cross-sectional gradient also carries cohort effects and the build-up of disease with age.
 
 ## 7. Work packages and gates
 
@@ -221,6 +222,9 @@ These were designed after the results were seen, in a critical review of the des
 - [x] Coverage: by approximate real year, ECGs end around 2019 while admissions run to about 2022; anchors after the ECG period would keep only early-window ECGs. Rule adopted: ≥1 ECG at the anchor admission (§6.2), rather than a calendar cut-off, which is only accurate to about ±1 year. Decided 30 Oct 2026.
 
 ## 11. Change log
+
+v1.7 (30 Oct 2026) — R5 plan, before running it
+- §6.9: R5 (drift vs age, exploratory).
 
 v1.6 (30 Oct 2026) — R4 done
 - §7: R4 result recorded.
