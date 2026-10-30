@@ -1,0 +1,166 @@
+[
+  {
+    "source": "MIMIC-IV (BIDMC)",
+    "first": 53254,
+    "multi": 5947,
+    "start": {
+      "AF": 27782,
+      "LIMBFX": 12013,
+      "LVSD": 7512
+    },
+    "excl": [
+      [
+        "Fracture code not an initial encounter",
+        {
+          "LIMBFX": 354
+        }
+      ],
+      [
+        "LVSD: earlier HF or cardiomyopathy code",
+        {
+          "LVSD": 1049
+        }
+      ],
+      [
+        "AF, fracture: LVSD code within 1 year",
+        {
+          "AF": 920,
+          "LIMBFX": 58
+        }
+      ],
+      [
+        "Age <18 years",
+        {}
+      ],
+      [
+        "No ECG at the anchor admission",
+        {
+          "AF": 9633,
+          "LIMBFX": 6640,
+          "LVSD": 2175
+        }
+      ]
+    ],
+    "eligible": {
+      "AF": 17229,
+      "LIMBFX": 4961,
+      "LVSD": 4288
+    },
+    "ecg_excl": [
+      [
+        "No ECG in the 5-year window",
+        {
+          "AF": 11707,
+          "LIMBFX": 3762,
+          "LVSD": 2849
+        }
+      ],
+      [
+        "<2 eligible ECGs or span <180 days",
+        {
+          "AF": 3516,
+          "LIMBFX": 665,
+          "LVSD": 882
+        }
+      ]
+    ],
+    "final": {
+      "AF": 2006,
+      "LIMBFX": 534,
+      "LVSD": 557
+    },
+    "ecgs": {
+      "AF": 14357,
+      "LIMBFX": 4283,
+      "LVSD": 4094
+    }
+  },
+  {
+    "source": "HEEDB (MGH + Emory)",
+    "first": 206349,
+    "multi": 4345,
+    "start": {
+      "AF": 115718,
+      "LIMBFX": 49981,
+      "LVSD": 36305
+    },
+    "excl": [
+      [
+        "Fracture code not an initial encounter",
+        {
+          "LIMBFX": 5752
+        }
+      ],
+      [
+        "LVSD: earlier HF or cardiomyopathy code",
+        {
+          "LVSD": 18786
+        }
+      ],
+      [
+        "AF, fracture: LVSD code within 1 year",
+        {
+          "AF": 9179,
+          "LIMBFX": 643
+        }
+      ],
+      [
+        "Coded history <1 year before the anchor",
+        {
+          "AF": 66247,
+          "LIMBFX": 20579,
+          "LVSD": 10511
+        }
+      ],
+      [
+        "Age <18 years or sex missing",
+        {
+          "AF": 4724,
+          "LIMBFX": 2377,
+          "LVSD": 573
+        }
+      ],
+      [
+        "No ECG within 30 days of the anchor",
+        {
+          "AF": 17226,
+          "LIMBFX": 16017,
+          "LVSD": 3032
+        }
+      ]
+    ],
+    "eligible": {
+      "AF": 18342,
+      "LIMBFX": 4613,
+      "LVSD": 3403
+    },
+    "ecg_excl": [
+      [
+        "No ECG in the 5-year window",
+        {
+          "AF": 6730,
+          "LIMBFX": 955,
+          "LVSD": 1394
+        }
+      ],
+      [
+        "<2 eligible ECGs or span <180 days",
+        {
+          "AF": 4746,
+          "LIMBFX": 1301,
+          "LVSD": 832
+        }
+      ]
+    ],
+    "final": {
+      "AF": 6866,
+      "LIMBFX": 2357,
+      "LVSD": 1177
+    },
+    "ecgs": {
+      "AF": 54631,
+      "LIMBFX": 24114,
+      "LVSD": 12676
+    }
+  }
+]
