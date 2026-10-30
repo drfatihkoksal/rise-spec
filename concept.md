@@ -1,6 +1,6 @@
 # RISE-SPEC — Is AI-ECG "early detection" target-specific within the same patient?
 
-Status: concept / pre-registration draft · v1.2 · 2026-10-30 (change log: §11)
+Status: concept / pre-registration draft · v1.3 · 2026-10-30 (change log: §11)
 Scope rule: minimum design that answers one question. Anything not listed here goes to §9 and needs an explicit decision before it is added.
 
 ## 1. Thesis
@@ -160,6 +160,14 @@ Purpose: a pre-specified secondary analysis of whether the result is specific to
 - **Readout:** the §4 classes and rules. Reported: the DeepECG rule in each data source, and whether it equals the EchoNext rule.
 - **Difference to state in the paper:** EchoNext-Mini is a classifier trained for LVEF ≤45%; DeepECG-SL predicts continuous LVEF.
 
+### 6.9 Post hoc robustness analyses (specified 30 Oct 2026, AFTER the primary, replication and second-model results)
+
+These were designed after the results were seen, in a critical review of the design. They are reported as post hoc and never replace the pre-specified readouts. Each is run for both models (EchoNext-Mini, DeepECG-SL) in both data sources (MIMIC, HEEDB), with the same model, Δ and classes as the corresponding primary analysis.
+
+- **R1 — lag (diagnostic-suspicion check):** drop ECGs from the last 12 months before the anchor (keep t ≤ −1 y) and refit the primary model. Rationale: an LVSD diagnosis can be triggered by the same ECG changes the model reads, which would inflate the LVSD slope near the anchor; R1 also reduces the effect of LVSD ECGs being somewhat closer to the anchor (share of ECGs in the last 12 months: LVSD 37%, AF 34%, LIMBFX 29% in MIMIC).
+- **R2 — symmetric exclusions:** also exclude AF and LIMBFX patients with an HF or cardiomyopathy code before the anchor (I50.x, I42.x, 428.x, 425.x), which §6.2 applied to the LVSD group only (MIMIC: 14.8% of AF and 12.5% of LIMBFX patients).
+- **R3 — event-free reference group (REF):** patients with no code from the LVSD, AF or LIMBFX sets and no HF or cardiomyopathy code at any time; a pseudo-anchor at the date of one of their ECGs chosen at random (seed 20261030), so that, like the event groups, they have an ECG at the anchor; then the §6.3 window and ECG rules (≥2 eligible ECGs spanning ≥180 days, age ≥18; in HEEDB also ≥1 code ≥365 days before the anchor). A random sample of 2,000 entering patients in MIMIC and 2,000 per HEEDB site. REF is added as a fourth group to the primary model; reported: β_REF and the contrasts LVSD−REF, AF−REF and LIMBFX−REF with their classes. Reading: if AF−REF and LIMBFX−REF are `≡`, the comparators' rise is a time trend shared with event-free patients rather than a pre-event change, and message 2 is worded accordingly.
+
 ## 7. Work packages and gates
 
 - **WP1 — Cohort & anchors** (DuckDB over MIMIC tables).
@@ -210,6 +218,9 @@ Purpose: a pre-specified secondary analysis of whether the result is specific to
 - [x] Coverage: by approximate real year, ECGs end around 2019 while admissions run to about 2022; anchors after the ECG period would keep only early-window ECGs. Rule adopted: ≥1 ECG at the anchor admission (§6.2), rather than a calendar cut-off, which is only accurate to about ±1 year. Decided 30 Oct 2026.
 
 ## 11. Change log
+
+v1.3 (30 Oct 2026) — post hoc robustness plan, before running it
+- §6.9: R1 lag, R2 symmetric exclusions, R3 event-free reference group (post hoc).
 
 v1.2 (30 Oct 2026) — second model done
 - §7: WP-D result recorded.
