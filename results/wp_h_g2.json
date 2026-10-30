@@ -1,0 +1,44 @@
+{
+  "run_date": "2026-10-30",
+  "cohort_scoring": {
+    "ecgs_in": 91421,
+    "scored": 91421,
+    "unreadable": 0,
+    "ventricular_rate_missing_share": 0.0067
+  },
+  "G2_H": {
+    "n": 199939,
+    "prevalent_lvsd": 10485,
+    "auroc": 0.8411,
+    "auroc_95ci_bootstrap": [
+      0.8369,
+      0.8449
+    ],
+    "D_G2_logit": 1.708,
+    "threshold": 0.7,
+    "pass": true,
+    "by_site": {
+      "I0001": {
+        "n": 99997,
+        "prevalent_lvsd": 5094,
+        "auroc": 0.8446,
+        "auroc_95ci_bootstrap": [
+          0.8391,
+          0.8506
+        ],
+        "D_G2_logit": 1.6502
+      },
+      "I0006": {
+        "n": 99942,
+        "prevalent_lvsd": 5391,
+        "auroc": 0.8382,
+        "auroc_95ci_bootstrap": [
+          0.8331,
+          0.8434
+        ],
+        "D_G2_logit": 1.7619
+      }
+    }
+  },
+  "delta_used": 0.0724
+}

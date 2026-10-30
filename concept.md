@@ -1,6 +1,6 @@
 # RISE-SPEC — Is AI-ECG "early detection" target-specific within the same patient?
 
-Status: concept / pre-registration draft · v0.9 · 2026-10-30 (change log: §11)
+Status: concept / pre-registration draft · v1.0 · 2026-10-30 (change log: §11)
 Scope rule: minimum design that answers one question. Anything not listed here goes to §9 and needs an explicit decision before it is added.
 
 ## 1. Thesis
@@ -161,6 +161,8 @@ Adaptations, each forced by the data:
 - **WP-H — HEEDB replication (§6.7):** data checks → bridge check in MIMIC → cohort (G1-H) → scoring (G2-H) → analysis and replication reading.
   **Bridge result (30 Oct 2026, `results/wp_h_bridge.json`):** with PR, QRS and QTc held constant, the MIMIC readout is still rule 1 in the primary model, S2 and S3, so HEEDB results are comparable with the MIMIC score.
   **G1-H result (30 Oct 2026, `results/wp_h_flow.json`):** pooled LVSD 1,177, AF 6,866, LIMBFX 2,357 (pass).
+  **G2-H result (30 Oct 2026, `results/wp_h_g2.json`):** n = 199,939, AUROC 0.841 (95% CI 0.837–0.845): pass. Δ stays 0.072 (MIMIC), as specified.
+  **WP3-H result (30 Oct 2026, `analysis/13_heedb_analysis.py` → `results/wp_h_results.json`):** readout rule 1, the same as in MIMIC, so the replication agrees (§6.7 item 12); rule 1 also in S2-H, S3 and at each site. Numbers are read from the results file.
 
 ## 8. Limitations accepted up front
 
@@ -192,6 +194,9 @@ Adaptations, each forced by the data:
 - [x] Coverage: by approximate real year, ECGs end around 2019 while admissions run to about 2022; anchors after the ECG period would keep only early-window ECGs. Rule adopted: ≥1 ECG at the anchor admission (§6.2), rather than a calendar cut-off, which is only accurate to about ±1 year. Decided 30 Oct 2026.
 
 ## 11. Change log
+
+v1.0 (30 Oct 2026) — HEEDB replication done
+- §7: bridge, G1-H, G2-H and replication reading recorded.
 
 v0.9 (30 Oct 2026) — HEEDB replication protocol, before any HEEDB score
 - §5, §6.7, §7, §9: external replication in HEEDB moved into scope, with its fixed protocol and data-forced adaptations.
