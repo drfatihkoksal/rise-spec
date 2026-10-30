@@ -4,3 +4,4 @@ work/
 external/
 __pycache__/
 *.log
+build/
