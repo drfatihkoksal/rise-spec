@@ -1,0 +1,32 @@
+{
+  "weights": "external/deepecg/weights/deepecg-sl_finetuned_LVEF_MHI/LVEF_MSE_SL.pt",
+  "strict_load": true,
+  "n_parameters": 1459519,
+  "checkpoint_keys": [
+    "iter",
+    "metrics",
+    "score",
+    "seed",
+    "state_dict"
+  ],
+  "seed": 44,
+  "iter": 3,
+  "score": 0.09063535700676972,
+  "metrics": {
+    "mse": 105.39015197753906,
+    "mae": 7.553250789642334,
+    "mean_error": 1.092551350593567,
+    "r2": 0.45847384567364435,
+    "pearson_correlation": 0.6831458982492441,
+    "r2_pct": 45.847384567364436
+  },
+  "input_shape": [
+    4,
+    12,
+    2500
+  ],
+  "output_shape": [
+    4,
+    1
+  ]
+}
