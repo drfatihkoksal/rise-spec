@@ -1,6 +1,6 @@
 # RISE-SPEC — Is AI-ECG "early detection" target-specific within the same patient?
 
-Status: concept / pre-registration draft · v0.8 · 2026-10-30 (change log: §11)
+Status: concept / pre-registration draft · v0.9 · 2026-10-30 (change log: §11)
 Scope rule: minimum design that answers one question. Anything not listed here goes to §9 and needs an explicit decision before it is added.
 
 ## 1. Thesis
@@ -50,6 +50,7 @@ Notation: subscript HIPFX and the letter H stand for the non-cardiac control gro
 
 ## 5. Data
 
+- External replication: HEEDB 5.0 (MGH, Emory), §6.7.
 - MIMIC-IV-ECG 1.0 (waveforms, machine measurements, machine report text) + MIMIC-IV 3.1 `hosp` (`patients`, `admissions`, `diagnoses_icd`) + MIMIC-IV-ED 2.2 (`edstays`, for acquisition context only). MIMIC-IV-ECHO 1.0 (`structured-measurement`) for the echo-anchored sensitivity analysis S4 only.
 - All processing is local (PhysioNet DUA). Only aggregate outputs leave the machine.
 
@@ -125,6 +126,26 @@ S4 definition: MIMIC-IV-ECHO 1.0 `structured-measurement`, `test_type = 'tte'`. 
 
 S1–S4 report the same contrasts. They qualify the primary readout but do not override it.
 
+### 6.7 External replication in HEEDB (written 30 Oct 2026, before any HEEDB score was computed)
+
+Data: HEEDB 5.0, MGH (I0001) and Emory (I0006): ECG metadata, GE 12SL v24 statements, ICD-9/ICD-10 code dates, WFDB waveforms (500 or 250 Hz). Data checks: `checks/01_heedb_checks.json` (dates aligned between ECGs and codes at both sites; MGH codes start in 2014, Emory codes in 1997).
+
+Unchanged from MIMIC as applied after G1: the −5 y to −30 d window, the LVSD, AF and LIMBFX code sets (dots removed) and their exclusions, the frozen model and waveform preprocessing, the patient fixed-effects model, the event-study bins, **Δ = 0.072 logit/year from the MIMIC G2** (the same margin; the HEEDB D_G2 is only reported) and the §4 readout rules.
+
+Adaptations, each forced by the data:
+1. **Anchor:** first date with a code from one set, from any encounter (HEEDB has no admission table). Multi-set exclusion = codes from more than one set on the anchor date; the 1-year and prior-code rules use dates.
+2. **Lookback:** ≥1 ICD code of any kind ≥365 days before the anchor, because MGH codes begin in 2014 while its ECGs go back to 1980.
+3. **Coverage:** ≥1 ECG (any rhythm) within ±30 days of the anchor date.
+4. **Rhythm and quality** from 12SL v24 codes: sinus = 19, 21, 22, 23, 24; non-sinus, paced or undetermined = 29, 30, 31, 34, 41, 42, 43, 61, 62, 63, 64, 108, 161, 162, 174, 175, 183–186, 235, 237, 238, 242, 248, 249, 266–268, 270–273, 275, 279, 288–299, 326, 1669; poor quality or electrode reversal = 1302, 1500, 1595, 1672, 1673. The waveform check is unchanged (10 s, no NaN, every lead ≥0.05 mV peak-to-peak).
+5. **Sampling:** 500 Hz records are decimated by taking every second sample, as in MIMIC; 250 Hz records are used as recorded.
+6. **Tabular inputs:** HEEDB has no machine measurements. Ventricular rate comes from lead II R peaks (neurokit2), which agrees with the MIMIC machine rate (1,000 ECGs: median absolute difference 0.5 bpm, r = 0.983; `checks/02_interval_agreement.json`). PR, QRS and QTc could not be derived reliably (neurokit2 DWT delineation in three variants against the machine values: |r| ≤ 0.36), so they are held at the training medians. The tabular inputs enter the model's final linear layer, so a constant input shifts every logit by the same amount and cannot change within-patient slopes or AUROC. Atrial rate is 0, age is frozen as in §6.1, sex comes from the metadata.
+7. **Bridge check (MIMIC):** the MIMIC cohort logits are recomputed exactly with PR, QRS and QTc held at the same constants (from the final-layer weights; no new inference), and the primary model, S2 and S3 are refitted. If the bridge readout rule differs from the MIMIC rule, the HEEDB results are reported as not comparable with the MIMIC score.
+8. **Sensitivity analyses:** S1 is not replicated (HEEDB has no encounter setting) and S4 is not replicated (no echo data). S2-H keeps ECGs without a 12SL statement of RBBB, LBBB, RBBB-or-RVH, IVCB or IVCD (codes 440, 442, 460, 482, 487), because QRS duration is not available. S3 is unchanged.
+9. **G1-H:** ≥500 patients per group, pooled across sites; no fallback, because the protocol is fixed. If a group has fewer, the replication is reported descriptively only.
+10. **G2-H:** one random sinus, quality-checked ECG per adult patient, from a random sample of 100,000 patients per site, dated ≥365 days after the patient's first code; label = an LVSD code on or before the ECG date; AUROC ≥0.70.
+11. **Analysis:** both sites pooled, entity = site × patient; per-site estimates are reported descriptively.
+12. **Replication reading:** the replication agrees if its primary readout rule equals the MIMIC rule (rule 1); any other rule is reported as a discordant replication.
+
 ## 7. Work packages and gates
 
 - **WP1 — Cohort & anchors** (DuckDB over MIMIC tables).
@@ -136,6 +157,8 @@ S1–S4 report the same contrasts. They qualify the primary readout but do not o
   **G2 result (30 Oct 2026, `results/wp2_g2.json`):** n = 151,421 ECGs (one per adult patient; 6,165 with a prevalent LVSD code), AUROC 0.898 (95% CI 0.894–0.902): pass. D_G2 = 2.172 logit, so **Δ = 0.072 logit/year**, fixed here. All 25,259 cohort ECGs (primary and S4) were scored; no slope has been estimated.
 - **WP3 — Analysis:** §6.4 → §6.5 → S1–S4 → §4 readout.
   **WP3 result (30 Oct 2026, `analysis/03_analysis.py` → `results/wp3_results.json`):** readout rule 1 in the primary analysis and in S1–S4. Numbers are read from the results file, not copied here.
+
+- **WP-H — HEEDB replication (§6.7):** data checks → bridge check in MIMIC → cohort (G1-H) → scoring (G2-H) → analysis and replication reading.
 
 ## 8. Limitations accepted up front
 
@@ -149,7 +172,7 @@ S1–S4 report the same contrasts. They qualify the primary readout but do not o
 ## 9. Out of scope (do not add without a decision)
 
 - Surveillance-bias / IPW analysis of who gets a follow-up echo (separate paper).
-- Training or fine-tuning any model; other targets (AS, HCM, amyloid); HEEDB replication.
+- Training or fine-tuning any model; other targets (AS, HCM, amyloid). (HEEDB replication moved into scope on 30 Oct 2026: §6.7.)
 - Individual-level detectability (MDC of the LVSD score).
 - Spline or change-point models of the pre-event trajectory (the event study covers timing).
 
@@ -167,6 +190,9 @@ S1–S4 report the same contrasts. They qualify the primary readout but do not o
 - [x] Coverage: by approximate real year, ECGs end around 2019 while admissions run to about 2022; anchors after the ECG period would keep only early-window ECGs. Rule adopted: ≥1 ECG at the anchor admission (§6.2), rather than a calendar cut-off, which is only accurate to about ±1 year. Decided 30 Oct 2026.
 
 ## 11. Change log
+
+v0.9 (30 Oct 2026) — HEEDB replication protocol, before any HEEDB score
+- §5, §6.7, §7, §9: external replication in HEEDB moved into scope, with its fixed protocol and data-forced adaptations.
 
 v0.8 (30 Oct 2026) — WP3 done
 - §7: WP3 run once as specified; readout rule recorded.

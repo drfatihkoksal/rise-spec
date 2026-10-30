@@ -1,0 +1,64 @@
+{
+  "n": 1000,
+  "seconds_per_ecg_per_worker": 0.234,
+  "ventricular_rate_d": {
+    "derivable": 0.996,
+    "bias_median": 0.3,
+    "mad": 0.5,
+    "r": 0.983
+  },
+  "pr_interval__II": {
+    "derivable": 0.978,
+    "bias_median": -62.0,
+    "mad": 62.0,
+    "r": 0.357
+  },
+  "pr_interval__median": {
+    "derivable": 0.987,
+    "bias_median": -66.0,
+    "mad": 66.0,
+    "r": 0.322
+  },
+  "pr_interval__minmax": {
+    "derivable": 0.951,
+    "bias_median": -84.0,
+    "mad": 85.0,
+    "r": 0.181
+  },
+  "qrs_duration__II": {
+    "derivable": 0.976,
+    "bias_median": 72.0,
+    "mad": 72.0,
+    "r": 0.116
+  },
+  "qrs_duration__median": {
+    "derivable": 0.993,
+    "bias_median": 69.0,
+    "mad": 69.0,
+    "r": 0.178
+  },
+  "qrs_duration__minmax": {
+    "derivable": 0.955,
+    "bias_median": 115.0,
+    "mad": 115.0,
+    "r": 0.217
+  },
+  "qt_corrected__II": {
+    "derivable": 0.99,
+    "bias_median": 26.3,
+    "mad": 58.4,
+    "r": -0.022
+  },
+  "qt_corrected__median": {
+    "derivable": 0.995,
+    "bias_median": 40.0,
+    "mad": 53.7,
+    "r": 0.05
+  },
+  "qt_corrected__minmax": {
+    "derivable": 0.995,
+    "bias_median": 100.2,
+    "mad": 101.5,
+    "r": 0.288
+  }
+}
