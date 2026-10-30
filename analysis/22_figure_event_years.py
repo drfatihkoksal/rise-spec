@@ -1,5 +1,5 @@
-"""Main figure by years before the event: event study for both models in both data sources, with the event-free
-reference group anchored at a random date (REF-D, R6). Descriptive; the bins are the pre-specified ones (§6.5).
+"""Main figure by years before the event: the pre-specified event studies for both models in both data sources (event
+groups), with the event-free reference group anchored at a random date (REF-D, R6) from its own model. Bins as pre-specified (§6.5).
 
     python3 -I analysis/22_figure_event_years.py
 
@@ -47,22 +47,39 @@ plt.rcParams.update({"font.family": "Liberation Sans", "font.size": 8, "xtick.la
                      "ytick.major.size": 0, "savefig.facecolor": "white"})
 
 
-def event_study4(df):
+def event_study_ref(df):
+    """Event study for the no-event group alone (bins, bin x age, bin x sex), on its own patient fixed effects."""
+    df = df[df.g == "REFD"]
     age_c = df.age - df.drop_duplicates("entity").age.mean()
     bins = [b for b in BIN_MID_Y if b != AN.REF_BIN]
     terms = {}
     for b in bins:
         ind = (df.bin == b).astype(float)
-        for g in G4:
-            terms[f"{b}_{g}"] = ind * (df.g == g)
-        terms[f"{b}_x_age_c"], terms[f"{b}_x_male"] = ind * age_c, ind * df.male_anchor.astype(float)
+        terms[f"{b}_REFD"], terms[f"{b}_x_age_c"], terms[f"{b}_x_male"] = ind, ind * age_c, ind * df.male_anchor.astype(float)
     res, used = AN.fit(df, terms)
-    out = {g: {AN.REF_BIN: {"est": 0.0, "ci95": [0.0, 0.0]}} for g in G4}
+    out = {AN.REF_BIN: {"est": 0.0, "ci95": [0.0, 0.0]}}
     for b in bins:
-        for g in G4:
-            e, lo, hi = AN.contrast(res, {f"{b}_{g}": 1}, 0.05)
-            out[g][b] = {"est": round(e, 4), "ci95": [round(lo, 4), round(hi, 4)]}
-    out["patients"] = {g: int(used[used.g == g].entity.nunique()) for g in G4}
+        e, lo, hi = AN.contrast(res, {f"{b}_REFD": 1}, 0.05)
+        out[b] = {"est": round(e, 4), "ci95": [round(lo, 4), round(hi, 4)]}
+    return out, int(used.entity.nunique())
+
+
+def prespecified(key):
+    """Event-group estimates from the pre-specified event studies (the values the text reports)."""
+    src = {"echonext_mimic": ("wp3_results.json", lambda r: r["event_study"]), "echonext_heedb": ("wp_h_results.json", lambda r: r["event_study"]),
+           "deepecg_mimic": ("wp_d_results.json", lambda r: r["mimic"]["event_study"]), "deepecg_heedb": ("wp_d_results.json", lambda r: r["heedb"]["event_study"])}[key]
+    es = src[1](json.loads((RESULTS / src[0]).read_text()))
+    out = {}
+    for g in ["LVSD", "AF", "CTRL"]:
+        out[g] = {AN.REF_BIN: {"est": 0.0, "ci95": [0.0, 0.0]}}
+        out[g].update({b: es["theta"][b][g] for b in BIN_MID_Y if b != AN.REF_BIN})
+    return out
+
+
+def event_study4(df, key):
+    out = prespecified(key)
+    out["REFD"], n_ref = event_study_ref(df)
+    out["patients"] = {"REFD": n_ref}
     return out
 
 
@@ -109,7 +126,7 @@ def panel(ax, est, model, title, rows):
 
 def main():
     OUT.mkdir(exist_ok=True)
-    ests = {f"{m}_{s}": event_study4(df) for (m, s), df in data().items()}
+    ests = {f"{m}_{s}": event_study4(df, f"{m}_{s}") for (m, s), df in data().items()}
     (RESULTS / "fig_event_years.json").write_text(json.dumps(ests, indent=2))
     fig, axes = plt.subplots(2, 2, figsize=(7.2, 5.6), sharex=True, gridspec_kw={"hspace": 0.35, "wspace": 0.28})
     rows = []
