@@ -1,0 +1,77 @@
+{
+  "run_date": "2026-10-30",
+  "exploratory": true,
+  "echonext_age_input_weight": 0.0411,
+  "echonext_mimic": {
+    "patients": 2000,
+    "within_drift_per_year": 0.0503,
+    "within_ci95": [
+      0.0358,
+      0.0647
+    ],
+    "cross_sectional_per_year_of_age": 0.0105,
+    "cross_ci95": [
+      0.0078,
+      0.0132
+    ],
+    "ratio_within_to_cross": 4.802,
+    "ratio_ci95_bootstrap": [
+      3.085,
+      6.801
+    ]
+  },
+  "deepecg_mimic": {
+    "patients": 2000,
+    "within_drift_per_year": 0.1108,
+    "within_ci95": [
+      0.061,
+      0.1605
+    ],
+    "cross_sectional_per_year_of_age": 0.0006,
+    "cross_ci95": [
+      -0.0065,
+      0.0078
+    ],
+    "ratio_within_to_cross": 171.652,
+    "ratio_ci95_bootstrap": [
+      -518.573,
+      574.73
+    ]
+  },
+  "echonext_heedb": {
+    "patients": 4000,
+    "within_drift_per_year": 0.0487,
+    "within_ci95": [
+      0.0368,
+      0.0606
+    ],
+    "cross_sectional_per_year_of_age": 0.0076,
+    "cross_ci95": [
+      0.0054,
+      0.0098
+    ],
+    "ratio_within_to_cross": 6.374,
+    "ratio_ci95_bootstrap": [
+      4.419,
+      9.37
+    ]
+  },
+  "deepecg_heedb": {
+    "patients": 4000,
+    "within_drift_per_year": 0.0913,
+    "within_ci95": [
+      0.0358,
+      0.1469
+    ],
+    "cross_sectional_per_year_of_age": 0.0006,
+    "cross_ci95": [
+      -0.0078,
+      0.009
+    ],
+    "ratio_within_to_cross": 160.432,
+    "ratio_ci95_bootstrap": [
+      -266.239,
+      211.802
+    ]
+  }
+}
