@@ -2,7 +2,8 @@ cff-version: 1.2.0
 message: "If you use this code, please cite the article and this software release."
 title: "RISE-SPEC: within-patient AI-ECG trajectories before left ventricular systolic dysfunction (analysis code)"
 version: 1.0.0
-date-released: 2026-10-30
+date-released: 2026-10-31
+repository-code: "https://github.com/drfatihkoksal/rise-spec"
 license: MIT
 authors:
   - family-names: "Köksal"
