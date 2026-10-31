@@ -1,6 +1,6 @@
 # RISE-SPEC — Is AI-ECG "early detection" target-specific within the same patient?
 
-Status: concept / pre-registration draft · v2.1 · 2026-10-31 (change log: §11)
+Status: concept / pre-registration draft · v2.2 · 2026-10-31 (change log: §11)
 Scope rule: minimum design that answers one question. Anything not listed here goes to §9 and needs an explicit decision before it is added.
 
 ## 1. Thesis
@@ -195,6 +195,7 @@ These were designed after the results were seen, in a critical review of the des
   **G1-H result (30 Oct 2026, `results/wp_h_flow.json`):** pooled LVSD 1,177, AF 6,866, LIMBFX 2,357 (pass).
   **G2-H result (30 Oct 2026, `results/wp_h_g2.json`):** n = 199,939, AUROC 0.841 (95% CI 0.837–0.845): pass. Δ stays 0.072 (MIMIC), as specified.
   **WP3-H result (30 Oct 2026, `analysis/13_heedb_analysis.py` → `results/wp_h_results.json`):** readout rule 1, the same as in MIMIC, so the replication agrees (§6.7 item 12); rule 1 also in S2-H, S3 and at each site. Numbers are read from the results file.
+- **Post hoc R7 result (31 Oct 2026, `results/robustness_r7_sex.json`):** LVSD−AF is `>` in women and in men in all four model × source combinations. Readout rule 1 in both sexes for EchoNext-Mini in HEEDB and for DeepECG-SL in both sources; for EchoNext-Mini in MIMIC, rule 1 in women and rule 5 in men (LVSD−LIMBFX `?`, 0.044, 95% CI −0.020 to 0.109). Between-sex differences of LVSD−AF: `?` in three combinations and `≡` in one (EchoNext-Mini, HEEDB). Between-sex differences of LVSD−LIMBFX: `?` in three and `>` in one (EchoNext-Mini, MIMIC; women − men 0.087, 0.004 to 0.170).
 
 ## 8. Limitations accepted up front
 
@@ -226,6 +227,9 @@ These were designed after the results were seen, in a critical review of the des
 - [x] Coverage: by approximate real year, ECGs end around 2019 while admissions run to about 2022; anchors after the ECG period would keep only early-window ECGs. Rule adopted: ≥1 ECG at the anchor admission (§6.2), rather than a calendar cut-off, which is only accurate to about ±1 year. Decided 30 Oct 2026.
 
 ## 11. Change log
+
+v2.2 (31 Oct 2026) — R7 done
+- §7: R7 result recorded.
 
 v2.1 (31 Oct 2026) — R7 plan, before running it
 - §6.9: R7 (sex-stratified analysis, post hoc).
