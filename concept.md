@@ -1,6 +1,6 @@
 # RISE-SPEC — Is AI-ECG "early detection" target-specific within the same patient?
 
-Status: concept / pre-registration draft · v2.0 · 2026-10-30 (change log: §11)
+Status: concept / pre-registration draft · v2.1 · 2026-10-31 (change log: §11)
 Scope rule: minimum design that answers one question. Anything not listed here goes to §9 and needs an explicit decision before it is added.
 
 ## 1. Thesis
@@ -170,6 +170,7 @@ These were designed after the results were seen, in a critical review of the des
 - **R4 — ECGs taken while LVEF was documented normal (prediction vs detection; specified 30 Oct 2026 after R1–R3, before running it):** in the echo-anchored LVSD group (S4, MIMIC only), keep only ECGs dated on or before the patient's last TTE with LVEF >45% before the anchor (same LVEF rules as S4), and only patients with ≥2 such ECGs spanning ≥180 days (162 patients, 1,250 ECGs by count; median 1.4 years from that echo to the first LVEF ≤45%). Comparators as in S4 (AF and LIMBFX, all window ECGs) plus REF (R3). Both models; same Δ and classes. Reported: LVSD−AF, LVSD−LIMBFX and LVSD−REF. Reading: `>` = the score already rises while LVEF is documented normal (prediction); `≡` = no meaningful rise before LVEF falls (the pre-diagnostic signal reflects detection of existing dysfunction); `?` = inconclusive. Expected to be underpowered.
 - **R5 — how much of the drift is ageing? (exploratory; specified 30 Oct 2026 after R1–R4, before running it):** in the event-free reference group (R3), compare the within-patient drift (fixed-effects slope per year) with the cross-sectional age gradient of the score (one ECG per patient, the first eligible; score on age at that ECG plus sex; per year of age). For EchoNext-Mini the contribution of the model's own age input is removed first (final-layer weight × scaled age), because it is constant within a patient. Ratio within/cross-sectional with a patient bootstrap 95% CI (500 resamples). Reading: ≈1 = drift consistent with ageing; >1 = more than ageing (period, device or selection effects). Within a patient, ageing and calendar time cannot be separated; the cross-sectional gradient also carries cohort effects and the build-up of disease with age.
 - **R6 — encounter-free pseudo-anchor (exploratory; specified 30 Oct 2026 after R5, before running it):** a second event-free reference group (REF-D) with the R3 inclusion rules, but the pseudo-anchor is a random calendar date, not an ECG date: uniform between 180 days after the patient's first ECG and the patient's last ECG (md5-seeded, seed 20261030), so the anchor lies inside the patient's ECG coverage without coinciding with an encounter. Same window and ECG rules, 2,000 entering patients in MIMIC and 2,000 per HEEDB site, both models. Reported: β_REF-D, β_REF-D − β_REF (R3) and the contrasts of LVSD, AF and LIMBFX against REF-D, with the Δ classes. Reading: β_REF-D `≡` β_REF and >0 = the drift is a time or period effect; β_REF-D near 0 (90% CI within ±Δ) = the R3 drift was a pre-encounter change, of the same kind as the rise before AF and fractures.
+- **R7 — sex (post hoc; specified 31 Oct 2026 after R1–R6, before running it):** the primary model (§6.4) refitted separately in women and in men, with the t × male term dropped and t × age_c kept; both models, both data sources, primary analysis set; the same Δ, classes and readout rules (§4) in each stratum. In addition, one pooled model with a slope for each group in each sex and the common t × age_c term gives the between-sex differences of the readout contrasts, (β_LVSD − β_AF) in women minus (β_LVSD − β_AF) in men, and the same for LVSD − LIMBFX, with 95% and 90% CIs and the Δ classes. Sex is the sex recorded in each database. Reading: readout rule 1 in both sexes and no `>` or `<` class for the sex differences = the target-specific result holds in women and in men; `≡` = the sex difference is negligible (within ±Δ); `?` = a sex difference can neither be shown nor excluded; `>` or `<` = the target-specific contrast differs by sex, direction reported. Output: `results/robustness_r7_sex.json`.
 
 ## 7. Work packages and gates
 
@@ -225,6 +226,9 @@ These were designed after the results were seen, in a critical review of the des
 - [x] Coverage: by approximate real year, ECGs end around 2019 while admissions run to about 2022; anchors after the ECG period would keep only early-window ECGs. Rule adopted: ≥1 ECG at the anchor admission (§6.2), rather than a calendar cut-off, which is only accurate to about ±1 year. Decided 30 Oct 2026.
 
 ## 11. Change log
+
+v2.1 (31 Oct 2026) — R7 plan, before running it
+- §6.9: R7 (sex-stratified analysis, post hoc).
 
 v2.0 (30 Oct 2026) — R6 done
 - §7: R6 result recorded.
