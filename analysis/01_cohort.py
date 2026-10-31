@@ -7,7 +7,7 @@ Patient-level outputs stay on this machine (work/); results/wp1_flow_<W>y_<contr
     python3 -I analysis/01_cohort.py --window-years 5                    # G1 fallback 1: wider window, once
     python3 -I analysis/01_cohort.py --window-years 5 --control LIMBFX   # G1 fallback 2: limb fractures
 
-Paths and versions: manuscript-submission skill, references/datasets.md.
+Paths and versions: README, Data access.
 """
 import argparse
 import json

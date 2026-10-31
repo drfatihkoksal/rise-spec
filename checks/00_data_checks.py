@@ -10,7 +10,7 @@ Writes checks/00_data_checks.json:
 - coverage: ECGs and admissions by approximate real year (anchor_year_group midpoint,
   so each year is only accurate to about +-1 y).
 
-Paths and versions: manuscript-submission skill, references/datasets.md.
+Paths and versions: README, Data access.
 """
 import json
 from pathlib import Path

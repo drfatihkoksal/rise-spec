@@ -2,7 +2,7 @@
 
 Analysis code, protocol versions and aggregate results for the study *Target-specific and accelerating:
 within-patient artificial intelligence electrocardiogram trajectories before left ventricular systolic
-dysfunction* (manuscript submitted).
+dysfunction*.
 
 **Question.** Within the same patients, does the score of an AI-ECG model for left ventricular systolic
 dysfunction (LVSD) rise faster before incident LVSD than before atrial fibrillation (AF), before a limb
@@ -19,7 +19,6 @@ slopes before each event were compared with patient fixed-effects regression and
 | `analysis/` | Cohorts, scoring, models, robustness analyses, figures, tables |
 | `results/` | Aggregate results (JSON/CSV) written by the analysis scripts |
 | `figures/` | Figures 1–2 with the data behind them |
-| `registry.json` | Pointers from every number in the manuscript to the result file and cell it comes from |
 
 No patient-level data are included. Patient-level intermediates are written to `work/`, which is not
 part of the repository.
@@ -71,10 +70,12 @@ Run from the repository root, in this order. Each script states its protocol sec
 | DeepECG-SL load check, scoring, analysis | `analysis/14_deepecg_check.py`, `15_deepecg_score.py`, `16_deepecg_analysis.py` | `results/deepecg_load_check.json`, `results/wp_d_*.json` | Table 2, Figure 2 |
 | Post hoc R1–R6 | `analysis/17_robustness.py` … `21_r6_random_date.py` | `results/robustness_r*.json` | Supplementary Tables S5, S6 |
 | Figures | `analysis/22_figure_event_years.py`, `23_flow_diagram.py` | `figures/` | Figures 1–2 |
-| Manuscript values and tables | `analysis/24_paper_numbers.py`, `25_manuscript_tables.py`, `26_supplement.py` | `results/manuscript_values.json`, tables, supplement | Text, Tables 1–2, Supplementary material |
 
 The gate runs with the pre-specified settings (`01_cohort.py` with the default three-year window and hip
 fracture, then `--window-years 5`) produce `results/wp1_flow_3y_hipfx.json` and `results/wp1_flow_5y_hipfx.json`.
+
+Every number in the paper is read from the result files above; the scripts that only format the paper's
+tables and text are not part of this repository.
 
 The full pipeline was run on 30 October 2026 on one workstation (32 CPU cores, one NVIDIA RTX 5090 GPU).
 The scoring steps take the longest; model fitting, figures and tables take minutes.

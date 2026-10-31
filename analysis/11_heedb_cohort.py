@@ -5,7 +5,7 @@
 Outputs (patient-level, local only): work/wp_h_anchors.parquet, work/wp_h_ecgs.parquet, work/wp_h_g2_sample.parquet
 Output (aggregate): results/wp_h_flow.json (flow per site and pooled, G1-H)
 
-Paths: manuscript-submission skill, references/datasets.md (HEEDB 5.0).
+Paths: README, Data access (HEEDB 5.0).
 """
 import json
 from datetime import date

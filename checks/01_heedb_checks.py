@@ -8,7 +8,7 @@ Writes checks/01_heedb_checks.json, per site (I0001 = MGH, I0006 = Emory):
 - age: AgeAtAcquisition against (ECG time - date of birth), to fix its unit;
 - waveform format on 2,000 random headers (sampling rate, samples, units, lead names).
 
-Paths: manuscript-submission skill, references/datasets.md (HEEDB 5.0).
+Paths: README, Data access (HEEDB 5.0).
 """
 import argparse
 import json
