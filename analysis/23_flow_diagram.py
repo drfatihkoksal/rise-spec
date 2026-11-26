@@ -42,8 +42,8 @@ def mimic():
     a, e = r["anchor_flow"], r["ecg_flow"]
     return {"source": "MIMIC-IV (BIDMC)", "first": r["first_event_patients"], "multi": r["ex_multi_set"], "start": a["start"],
             "excl": [("Fracture code not an initial encounter", a["ex_control_not_initial"]),
-                     ("LVSD: earlier HF or cardiomyopathy code", a["ex_prior_hf_cm"]),
-                     ("AF, fracture: LVSD code within 1 year", a["ex_lvsd_within_1y"]),
+                     ("Systolic HF: earlier HF or cardiomyopathy code", a["ex_prior_hf_cm"]),
+                     ("AF, fracture: systolic HF code within 1 year", a["ex_lvsd_within_1y"]),
                      ("Age <18 years", a["ex_age"]),
                      ("No ECG at the anchor admission", a["ex_no_ecg_at_anchor"])],
             "eligible": a["after_ex_no_ecg_at_anchor"],
@@ -60,8 +60,8 @@ def heedb():
     return {"source": "HEEDB (MGH + Emory)", "first": sum(x["first_event_patients"] for x in s), "multi": sum(x["ex_multi_set"] for x in s),
             "start": a["start"],
             "excl": [("Fracture code not an initial encounter", a["ex_control_not_initial"]),
-                     ("LVSD: earlier HF or cardiomyopathy code", a["ex_prior_hf_cm"]),
-                     ("AF, fracture: LVSD code within 1 year", a["ex_lvsd_within_1y"]),
+                     ("Systolic HF: earlier HF or cardiomyopathy code", a["ex_prior_hf_cm"]),
+                     ("AF, fracture: systolic HF code within 1 year", a["ex_lvsd_within_1y"]),
                      ("Coded history <1 year before the anchor", a["ex_lookback_lt_1y"]),
                      ("Age <18 years or sex missing", a["ex_age_or_sex_missing"]),
                      ("No ECG within 30 days of the anchor", a["ex_no_ecg_at_anchor"])],
@@ -90,9 +90,9 @@ def column(ax, d):
     ax.set_xlim(0, 1); ax.set_ylim(0.15, 1); ax.axis("off")
     ax.text(0.0, 0.985, d["source"], fontsize=8, fontweight="bold", color=INK, va="top")
     xm, xs = 0.24, 0.47
-    lab = "LVSD / AF / fracture"
+    lab = "systolic HF / AF / fracture"
     ys = [0.90, 0.72, 0.42, 0.22]
-    box(ax, xm, ys[0], f"First LVSD, AF or limb-fracture code\nn = {f(d['first'])}", 0.4)
+    box(ax, xm, ys[0], f"First systolic HF, AF or limb-fracture code\nn = {f(d['first'])}", 0.4)
     side(ax, xm, (ys[0] + ys[1]) / 2, xs, f"Codes from more than one group\nat the first event: {f(d['multi'])}")
     box(ax, xm, ys[1], f"Single-group first event\n{lab}\n{trio(d['start'])}", 0.4)
     excl = "\n".join(f"{t}: {trio(v)}" for t, v in d["excl"])
@@ -100,7 +100,7 @@ def column(ax, d):
     box(ax, xm, ys[2], f"Eligible anchors\n{lab}\n{trio(d['eligible'])}", 0.4)
     ecg = "\n".join(f"{t}: {trio(v)}" for t, v in d["ecg_excl"])
     side(ax, xm, (ys[2] + ys[3]) / 2, xs, f"ECG rules ({lab})\n{ecg}")
-    box(ax, xm, ys[3], f"Analysed\nLVSD {f(d['final'].get('LVSD', 0))} · AF {f(d['final'].get('AF', 0))} · fracture {f(d['final'].get('LIMBFX', 0))}\n"
+    box(ax, xm, ys[3], f"Analysed\nSystolic HF {f(d['final'].get('LVSD', 0))} · AF {f(d['final'].get('AF', 0))} · fracture {f(d['final'].get('LIMBFX', 0))}\n"
                        f"ECGs {f(sum(d['ecgs'].values()))}", 0.4, bold=True)
     for y0, y1 in zip(ys[:-1], ys[1:]):
         arrow(ax, xm, y0 - 0.045, y1 + 0.05)

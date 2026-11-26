@@ -4,6 +4,11 @@ echonext,EchoNext-Mini · MIMIC-IV (BIDMC),LVSD,m36_24,-2.5,0.2386,0.1395,0.3377
 echonext,EchoNext-Mini · MIMIC-IV (BIDMC),LVSD,m24_12,-1.5,0.3916,0.278,0.5051
 echonext,EchoNext-Mini · MIMIC-IV (BIDMC),LVSD,m12_6,-0.75,0.5134,0.4015,0.6253
 echonext,EchoNext-Mini · MIMIC-IV (BIDMC),LVSD,m6_1,-0.29,0.7573,0.6286,0.886
+echonext,EchoNext-Mini · MIMIC-IV (BIDMC),DHF,m60_36,-4.0,0.0,0.0,0.0
+echonext,EchoNext-Mini · MIMIC-IV (BIDMC),DHF,m36_24,-2.5,0.0921,0.0148,0.1694
+echonext,EchoNext-Mini · MIMIC-IV (BIDMC),DHF,m24_12,-1.5,0.2526,0.1745,0.3307
+echonext,EchoNext-Mini · MIMIC-IV (BIDMC),DHF,m12_6,-0.75,0.3246,0.2352,0.4141
+echonext,EchoNext-Mini · MIMIC-IV (BIDMC),DHF,m6_1,-0.29,0.4639,0.3729,0.555
 echonext,EchoNext-Mini · MIMIC-IV (BIDMC),AF,m60_36,-4.0,0.0,0.0,0.0
 echonext,EchoNext-Mini · MIMIC-IV (BIDMC),AF,m36_24,-2.5,0.0857,0.0229,0.1484
 echonext,EchoNext-Mini · MIMIC-IV (BIDMC),AF,m24_12,-1.5,0.22,0.1508,0.2893
@@ -24,6 +29,11 @@ echonext,EchoNext-Mini · HEEDB (MGH + Emory),LVSD,m36_24,-2.5,0.1735,0.1073,0.2
 echonext,EchoNext-Mini · HEEDB (MGH + Emory),LVSD,m24_12,-1.5,0.2422,0.1661,0.3184
 echonext,EchoNext-Mini · HEEDB (MGH + Emory),LVSD,m12_6,-0.75,0.3953,0.2856,0.5051
 echonext,EchoNext-Mini · HEEDB (MGH + Emory),LVSD,m6_1,-0.29,0.5842,0.4864,0.682
+echonext,EchoNext-Mini · HEEDB (MGH + Emory),DHF,m60_36,-4.0,0.0,0.0,0.0
+echonext,EchoNext-Mini · HEEDB (MGH + Emory),DHF,m36_24,-2.5,0.0153,-0.044,0.0747
+echonext,EchoNext-Mini · HEEDB (MGH + Emory),DHF,m24_12,-1.5,0.1322,0.0632,0.2013
+echonext,EchoNext-Mini · HEEDB (MGH + Emory),DHF,m12_6,-0.75,0.1785,0.0919,0.2651
+echonext,EchoNext-Mini · HEEDB (MGH + Emory),DHF,m6_1,-0.29,0.2488,0.1523,0.3453
 echonext,EchoNext-Mini · HEEDB (MGH + Emory),AF,m60_36,-4.0,0.0,0.0,0.0
 echonext,EchoNext-Mini · HEEDB (MGH + Emory),AF,m36_24,-2.5,0.0674,0.0288,0.106
 echonext,EchoNext-Mini · HEEDB (MGH + Emory),AF,m24_12,-1.5,0.1186,0.0797,0.1575
@@ -44,6 +54,11 @@ deepecg,DeepECG-SL · MIMIC-IV (BIDMC),LVSD,m36_24,-2.5,-1.3592,-2.1215,-0.597
 deepecg,DeepECG-SL · MIMIC-IV (BIDMC),LVSD,m24_12,-1.5,-1.8789,-2.6411,-1.1166
 deepecg,DeepECG-SL · MIMIC-IV (BIDMC),LVSD,m12_6,-0.75,-2.3618,-3.3032,-1.4203
 deepecg,DeepECG-SL · MIMIC-IV (BIDMC),LVSD,m6_1,-0.29,-3.8969,-4.9362,-2.8576
+deepecg,DeepECG-SL · MIMIC-IV (BIDMC),DHF,m60_36,-4.0,-0.0,-0.0,-0.0
+deepecg,DeepECG-SL · MIMIC-IV (BIDMC),DHF,m36_24,-2.5,-0.0745,-0.3831,0.234
+deepecg,DeepECG-SL · MIMIC-IV (BIDMC),DHF,m24_12,-1.5,-0.4491,-0.7569,-0.1413
+deepecg,DeepECG-SL · MIMIC-IV (BIDMC),DHF,m12_6,-0.75,-0.5616,-0.9471,-0.1761
+deepecg,DeepECG-SL · MIMIC-IV (BIDMC),DHF,m6_1,-0.29,-0.8704,-1.3092,-0.4316
 deepecg,DeepECG-SL · MIMIC-IV (BIDMC),AF,m60_36,-4.0,-0.0,-0.0,-0.0
 deepecg,DeepECG-SL · MIMIC-IV (BIDMC),AF,m36_24,-2.5,-0.2969,-0.593,-0.0009
 deepecg,DeepECG-SL · MIMIC-IV (BIDMC),AF,m24_12,-1.5,-0.4613,-0.7523,-0.1703
@@ -64,6 +79,11 @@ deepecg,DeepECG-SL · HEEDB (MGH + Emory),LVSD,m36_24,-2.5,-0.5209,-1.0843,0.042
 deepecg,DeepECG-SL · HEEDB (MGH + Emory),LVSD,m24_12,-1.5,-0.9037,-1.6403,-0.167
 deepecg,DeepECG-SL · HEEDB (MGH + Emory),LVSD,m12_6,-0.75,-1.8702,-2.6573,-1.0832
 deepecg,DeepECG-SL · HEEDB (MGH + Emory),LVSD,m6_1,-0.29,-3.4322,-4.3384,-2.526
+deepecg,DeepECG-SL · HEEDB (MGH + Emory),DHF,m60_36,-4.0,-0.0,-0.0,-0.0
+deepecg,DeepECG-SL · HEEDB (MGH + Emory),DHF,m36_24,-2.5,0.2955,-0.0717,0.6627
+deepecg,DeepECG-SL · HEEDB (MGH + Emory),DHF,m24_12,-1.5,0.0979,-0.2922,0.488
+deepecg,DeepECG-SL · HEEDB (MGH + Emory),DHF,m12_6,-0.75,-0.2863,-0.8424,0.2699
+deepecg,DeepECG-SL · HEEDB (MGH + Emory),DHF,m6_1,-0.29,-0.5044,-1.161,0.1521
 deepecg,DeepECG-SL · HEEDB (MGH + Emory),AF,m60_36,-4.0,-0.0,-0.0,-0.0
 deepecg,DeepECG-SL · HEEDB (MGH + Emory),AF,m36_24,-2.5,-0.0255,-0.2241,0.1731
 deepecg,DeepECG-SL · HEEDB (MGH + Emory),AF,m24_12,-1.5,-0.2267,-0.4536,0.0002

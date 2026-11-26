@@ -38,9 +38,10 @@ G4 = ["LVSD", "AF", "CTRL", "REFD"]
 BIN_MID_Y = {"m60_36": -4.0, "m36_24": -2.5, "m24_12": -1.5, "m12_6": -0.75, "m6_1": -0.29}
 
 INK, INK2, MUTED, GRID, AXIS = "#0b0b0b", "#52514e", "#898781", "#e1e0d9", "#c3c2b7"
-SERIES = {"LVSD": ("LVSD", "#2a78d6", "o"), "AF": ("AF", "#eb6834", "s"),
-          "CTRL": ("Limb fracture", "#1baf7a", "^"), "REFD": ("No event (random date)", "#6b6a66", "D")}  # darker than MUTED: CVD-separable from aqua (dataviz validator)
-DODGE = {"LVSD": -0.06, "AF": -0.02, "CTRL": 0.02, "REFD": 0.06}
+SERIES = {"LVSD": ("Systolic heart failure", "#2a78d6", "o"), "DHF": ("Diastolic heart failure", "#c2409a", "v"),
+          "AF": ("Atrial fibrillation", "#eb6834", "s"), "CTRL": ("Limb fracture", "#1baf7a", "^"),
+          "REFD": ("No event (random date)", "#6b6a66", "D")}  # dataviz validator, all pairs: CVD dE >= 8.0, normal-vision dE >= 17.6; gray is the neutral reference
+DODGE = {"LVSD": -0.08, "DHF": -0.04, "AF": 0.0, "CTRL": 0.04, "REFD": 0.08}
 plt.rcParams.update({"font.family": "Liberation Sans", "font.size": 8, "xtick.labelsize": 7, "ytick.labelsize": 7,
                      "legend.fontsize": 7, "pdf.fonttype": 42, "axes.edgecolor": AXIS, "axes.linewidth": 0.8,
                      "xtick.color": INK2, "ytick.color": INK2, "axes.labelcolor": INK, "xtick.major.size": 0,
@@ -76,8 +77,18 @@ def prespecified(key):
     return out
 
 
+def diastolic(key):
+    """Diastolic heart failure: event study of the primary model with that group added (post hoc R8)."""
+    m, s = key.split("_")
+    th = json.loads((RESULTS / "robustness_r8_r9.json").read_text())[m][s]["R8"]["event_study"]["theta"]
+    out = {AN.REF_BIN: {"est": 0.0, "ci95": [0.0, 0.0]}}
+    out.update({b: th[b]["DHF"] for b in BIN_MID_Y if b != AN.REF_BIN})
+    return out
+
+
 def event_study4(df, key):
     out = prespecified(key)
+    out["DHF"] = diastolic(key)
     out["REFD"], n_ref = event_study_ref(df)
     out["patients"] = {"REFD": n_ref}
     return out
@@ -146,7 +157,7 @@ def main():
     for k, lbl in enumerate("ABCD"):
         axes.flat[k].text(-0.14, 1.06, lbl, transform=axes.flat[k].transAxes, fontsize=10, fontweight="bold", color=INK)
     h, l = axes[0, 0].get_legend_handles_labels()
-    fig.legend(h, l, loc="upper center", ncol=4, frameon=False, bbox_to_anchor=(0.5, 1.0), labelcolor=INK)
+    fig.legend(h, l, loc="upper center", ncol=3, frameon=False, bbox_to_anchor=(0.5, 1.03), labelcolor=INK)
     fig.savefig(OUT / "fig_event_years.pdf", bbox_inches="tight")
     fig.savefig(OUT / "fig_event_years.png", dpi=300, bbox_inches="tight")
     pd.DataFrame(rows).to_csv(OUT / "fig_event_years_data.csv", index=False)

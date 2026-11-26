@@ -16,13 +16,13 @@
         }
       ],
       [
-        "LVSD: earlier HF or cardiomyopathy code",
+        "Systolic HF: earlier HF or cardiomyopathy code",
         {
           "LVSD": 1049
         }
       ],
       [
-        "AF, fracture: LVSD code within 1 year",
+        "AF, fracture: systolic HF code within 1 year",
         {
           "AF": 920,
           "LIMBFX": 58
@@ -92,13 +92,13 @@
         }
       ],
       [
-        "LVSD: earlier HF or cardiomyopathy code",
+        "Systolic HF: earlier HF or cardiomyopathy code",
         {
           "LVSD": 18786
         }
       ],
       [
-        "AF, fracture: LVSD code within 1 year",
+        "AF, fracture: systolic HF code within 1 year",
         {
           "AF": 9179,
           "LIMBFX": 643
