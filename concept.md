@@ -1,6 +1,6 @@
 # RISE-SPEC — Is AI-ECG "early detection" target-specific within the same patient?
 
-Status: concept / pre-registration draft · v2.5 · 2026-11-26 (change log: §11)
+Status: concept / pre-registration draft · v2.6 · 2026-11-26 (change log: §11)
 Scope rule: minimum design that answers one question. Anything not listed here goes to §9 and needs an explicit decision before it is added.
 
 ## 1. Thesis
@@ -213,6 +213,7 @@ These were designed after the results were seen, in a critical review of the des
   **WP3-H result (30 Oct 2026, `analysis/13_heedb_analysis.py` → `results/wp_h_results.json`):** readout rule 1, the same as in MIMIC, so the replication agrees (§6.7 item 12); rule 1 also in S2-H, S3 and at each site. Numbers are read from the results file.
 - **Post hoc R7 result (31 Oct 2026, `results/robustness_r7_sex.json`):** LVSD−AF is `>` in women and in men in all four model × source combinations. Readout rule 1 in both sexes for EchoNext-Mini in HEEDB and for DeepECG-SL in both sources; for EchoNext-Mini in MIMIC, rule 1 in women and rule 5 in men (LVSD−LIMBFX `?`, 0.044, 95% CI −0.020 to 0.109). Between-sex differences of LVSD−AF: `?` in three combinations and `≡` in one (EchoNext-Mini, HEEDB). Between-sex differences of LVSD−LIMBFX: `?` in three and `>` in one (EchoNext-Mini, MIMIC; women − men 0.087, 0.004 to 0.170).
 - **Post hoc R8 and R9 result (26 Nov 2026, `analysis/30_r8_r9_comparators.py` → `results/robustness_r8_r9.json`):** all ECGs of the new groups were scored (MIMIC: DHF 743 patients, 5,722 ECGs; AS 106, 687. HEEDB: DHF 1,144, 11,837; AS 1,312, 8,158). R8: LVSD−DHF is `>` for both models in both data sources, and DHF−AF and DHF−LIMBFX are `≡` in all four; reading: the pre-diagnostic rise has a component specific to systolic dysfunction, beyond the heart failure syndrome. R8-E (MIMIC): LVSD−DHF `>` for both models in both restrictions (338 DHF patients with LVEF ≥50%; 336 and 319 LVSD patients). R9: in HEEDB LVSD−AS is `>` and AS−AF, AS−LIMBFX and AS−DHF are `≡` for both models; in MIMIC (gate failed, no class) the LVSD−AS interval includes zero for EchoNext-Mini and excludes it for DeepECG-SL. Numbers are read from the results file.
+- **Post hoc R10 and R11 result (26 Nov 2026, `analysis/31_r10_r11_parts_and_selection.py` → `results/robustness_r10_r11.json`):** R10: additivity holds (largest deviation 2.4 × 10⁻⁷ logit in 500 ECGs; parts sum to the total slope). In MIMIC the waveform part carries 83–85% of each group's slope and 81–82% of the LVSD contrasts; QRS 8–12%, QTc 4–6%, ventricular rate about 1% or less, PR about 0. In HEEDB (only ventricular rate varies) the waveform part carries 95–102%. R11: the share entering after the ECG rules is 4.6–12.3% in MIMIC and 11.4–22.8% in HEEDB. Entering and removed patients are similar in LVSD, AF, DHF and AS (standardized differences below 0.22); entering limb-fracture patients are older (MIMIC: median 73 against 60 years, standardized difference 0.69; HEEDB 0.28) and in MIMIC more often women. Numbers are read from the results file.
 
 ## 8. Limitations accepted up front
 
@@ -244,6 +245,9 @@ These were designed after the results were seen, in a critical review of the des
 - [x] Coverage: by approximate real year, ECGs end around 2019 while admissions run to about 2022; anchors after the ECG period would keep only early-window ECGs. Rule adopted: ≥1 ECG at the anchor admission (§6.2), rather than a calendar cut-off, which is only accurate to about ±1 year. Decided 30 Oct 2026.
 
 ## 11. Change log
+
+v2.6 (26 Nov 2026) — R10 and R11 done
+- §7: R10 and R11 results recorded.
 
 v2.5 (26 Nov 2026) — R10 and R11 plan, before running them
 - §6.9: R10 (slope parts through the tabular inputs of EchoNext-Mini) and R11 (patients removed by the ECG rules), both descriptive.

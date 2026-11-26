@@ -1,0 +1,1184 @@
+{
+  "run_date": "2026-11-26",
+  "post_hoc": true,
+  "R10": {
+    "final_layer_weights_lvef_output": {
+      "male": 0.1543000042438507,
+      "age_at_ecg": 0.041099999099969864,
+      "ventricular_rate": 0.11460000276565552,
+      "atrial_rate": -0.0027000000700354576,
+      "pr_interval": -0.013399999588727951,
+      "qrs_duration": 0.19859999418258667,
+      "qt_corrected": 0.14259999990463257
+    },
+    "additivity_check_mimic": {
+      "ecgs": 500,
+      "largest_abs_deviation_logit": 2.38e-07,
+      "largest_abs_change_logit": 0.846,
+      "largest_abs_difference_from_stored_logit": 2.38e-07
+    },
+    "mimic": {
+      "primary_model": {
+        "parts": {
+          "total": {
+            "LVSD": {
+              "est": 0.1901,
+              "ci95": [
+                0.1588,
+                0.2214
+              ]
+            },
+            "AF": {
+              "est": 0.1034,
+              "ci95": [
+                0.0826,
+                0.1242
+              ]
+            },
+            "CTRL": {
+              "est": 0.0915,
+              "ci95": [
+                0.0617,
+                0.1214
+              ]
+            },
+            "L-A": {
+              "est": 0.0867,
+              "ci95": [
+                0.052,
+                0.1213
+              ]
+            },
+            "L-H": {
+              "est": 0.0985,
+              "ci95": [
+                0.0581,
+                0.139
+              ]
+            }
+          },
+          "ventricular_rate": {
+            "LVSD": {
+              "est": 0.0012,
+              "ci95": [
+                -0.0018,
+                0.0042
+              ],
+              "share_of_total": 0.006
+            },
+            "AF": {
+              "est": 0.0001,
+              "ci95": [
+                -0.002,
+                0.0023
+              ],
+              "share_of_total": 0.001
+            },
+            "CTRL": {
+              "est": 0.0006,
+              "ci95": [
+                -0.0032,
+                0.0044
+              ],
+              "share_of_total": 0.007
+            },
+            "L-A": {
+              "est": 0.0011,
+              "ci95": [
+                -0.002,
+                0.0041
+              ],
+              "share_of_total": 0.012
+            },
+            "L-H": {
+              "est": 0.0006,
+              "ci95": [
+                -0.004,
+                0.0051
+              ],
+              "share_of_total": 0.006
+            }
+          },
+          "pr_interval": {
+            "LVSD": {
+              "est": -0.0002,
+              "ci95": [
+                -0.0004,
+                -0.0001
+              ],
+              "share_of_total": -0.001
+            },
+            "AF": {
+              "est": -0.0003,
+              "ci95": [
+                -0.0004,
+                -0.0002
+              ],
+              "share_of_total": -0.003
+            },
+            "CTRL": {
+              "est": -0.0002,
+              "ci95": [
+                -0.0004,
+                -0.0001
+              ],
+              "share_of_total": -0.003
+            },
+            "L-A": {
+              "est": 0.0,
+              "ci95": [
+                -0.0001,
+                0.0002
+              ],
+              "share_of_total": 0.001
+            },
+            "L-H": {
+              "est": -0.0,
+              "ci95": [
+                -0.0002,
+                0.0002
+              ],
+              "share_of_total": -0.0
+            }
+          },
+          "qrs_duration": {
+            "LVSD": {
+              "est": 0.0199,
+              "ci95": [
+                0.0148,
+                0.0251
+              ],
+              "share_of_total": 0.105
+            },
+            "AF": {
+              "est": 0.0095,
+              "ci95": [
+                0.0065,
+                0.0125
+              ],
+              "share_of_total": 0.092
+            },
+            "CTRL": {
+              "est": 0.0078,
+              "ci95": [
+                0.0033,
+                0.0123
+              ],
+              "share_of_total": 0.085
+            },
+            "L-A": {
+              "est": 0.0104,
+              "ci95": [
+                0.0051,
+                0.0158
+              ],
+              "share_of_total": 0.12
+            },
+            "L-H": {
+              "est": 0.0121,
+              "ci95": [
+                0.0058,
+                0.0185
+              ],
+              "share_of_total": 0.123
+            }
+          },
+          "qt_corrected": {
+            "LVSD": {
+              "est": 0.0106,
+              "ci95": [
+                0.0075,
+                0.0138
+              ],
+              "share_of_total": 0.056
+            },
+            "AF": {
+              "est": 0.0057,
+              "ci95": [
+                0.0038,
+                0.0076
+              ],
+              "share_of_total": 0.055
+            },
+            "CTRL": {
+              "est": 0.0053,
+              "ci95": [
+                0.0022,
+                0.0084
+              ],
+              "share_of_total": 0.058
+            },
+            "L-A": {
+              "est": 0.0049,
+              "ci95": [
+                0.0017,
+                0.0081
+              ],
+              "share_of_total": 0.057
+            },
+            "L-H": {
+              "est": 0.0053,
+              "ci95": [
+                0.0011,
+                0.0096
+              ],
+              "share_of_total": 0.054
+            }
+          },
+          "waveform": {
+            "LVSD": {
+              "est": 0.1586,
+              "ci95": [
+                0.1302,
+                0.1869
+              ],
+              "share_of_total": 0.834
+            },
+            "AF": {
+              "est": 0.0883,
+              "ci95": [
+                0.0694,
+                0.1073
+              ],
+              "share_of_total": 0.854
+            },
+            "CTRL": {
+              "est": 0.0781,
+              "ci95": [
+                0.0489,
+                0.1073
+              ],
+              "share_of_total": 0.853
+            },
+            "L-A": {
+              "est": 0.0702,
+              "ci95": [
+                0.0387,
+                0.1017
+              ],
+              "share_of_total": 0.81
+            },
+            "L-H": {
+              "est": 0.0805,
+              "ci95": [
+                0.0425,
+                0.1185
+              ],
+              "share_of_total": 0.817
+            }
+          }
+        },
+        "largest_gap_between_sum_of_parts_and_total": 2.35e-09
+      },
+      "r8_model": {
+        "parts": {
+          "total": {
+            "LVSD": {
+              "est": 0.1827,
+              "ci95": [
+                0.1523,
+                0.213
+              ]
+            },
+            "AF": {
+              "est": 0.0982,
+              "ci95": [
+                0.0782,
+                0.1183
+              ]
+            },
+            "CTRL": {
+              "est": 0.0873,
+              "ci95": [
+                0.0582,
+                0.1163
+              ]
+            },
+            "DHF": {
+              "est": 0.117,
+              "ci95": [
+                0.0943,
+                0.1398
+              ]
+            },
+            "L-A": {
+              "est": 0.0844,
+              "ci95": [
+                0.0501,
+                0.1187
+              ]
+            },
+            "L-H": {
+              "est": 0.0954,
+              "ci95": [
+                0.0554,
+                0.1354
+              ]
+            },
+            "L-D": {
+              "est": 0.0656,
+              "ci95": [
+                0.0304,
+                0.1009
+              ]
+            }
+          },
+          "ventricular_rate": {
+            "LVSD": {
+              "est": 0.0006,
+              "ci95": [
+                -0.0023,
+                0.0036
+              ],
+              "share_of_total": 0.003
+            },
+            "AF": {
+              "est": -0.0005,
+              "ci95": [
+                -0.0025,
+                0.0016
+              ],
+              "share_of_total": -0.005
+            },
+            "CTRL": {
+              "est": 0.0003,
+              "ci95": [
+                -0.0034,
+                0.0041
+              ],
+              "share_of_total": 0.004
+            },
+            "DHF": {
+              "est": 0.0012,
+              "ci95": [
+                -0.001,
+                0.0034
+              ],
+              "share_of_total": 0.01
+            },
+            "L-A": {
+              "est": 0.0011,
+              "ci95": [
+                -0.002,
+                0.0041
+              ],
+              "share_of_total": 0.013
+            },
+            "L-H": {
+              "est": 0.0003,
+              "ci95": [
+                -0.0042,
+                0.0048
+              ],
+              "share_of_total": 0.003
+            },
+            "L-D": {
+              "est": -0.0005,
+              "ci95": [
+                -0.004,
+                0.0029
+              ],
+              "share_of_total": -0.008
+            }
+          },
+          "pr_interval": {
+            "LVSD": {
+              "est": -0.0002,
+              "ci95": [
+                -0.0004,
+                -0.0001
+              ],
+              "share_of_total": -0.001
+            },
+            "AF": {
+              "est": -0.0003,
+              "ci95": [
+                -0.0004,
+                -0.0002
+              ],
+              "share_of_total": -0.003
+            },
+            "CTRL": {
+              "est": -0.0002,
+              "ci95": [
+                -0.0004,
+                -0.0001
+              ],
+              "share_of_total": -0.003
+            },
+            "DHF": {
+              "est": -0.0003,
+              "ci95": [
+                -0.0004,
+                -0.0002
+              ],
+              "share_of_total": -0.003
+            },
+            "L-A": {
+              "est": 0.0,
+              "ci95": [
+                -0.0001,
+                0.0002
+              ],
+              "share_of_total": 0.001
+            },
+            "L-H": {
+              "est": -0.0,
+              "ci95": [
+                -0.0002,
+                0.0002
+              ],
+              "share_of_total": -0.0
+            },
+            "L-D": {
+              "est": 0.0001,
+              "ci95": [
+                -0.0001,
+                0.0003
+              ],
+              "share_of_total": 0.001
+            }
+          },
+          "qrs_duration": {
+            "LVSD": {
+              "est": 0.02,
+              "ci95": [
+                0.015,
+                0.0251
+              ],
+              "share_of_total": 0.11
+            },
+            "AF": {
+              "est": 0.0096,
+              "ci95": [
+                0.0068,
+                0.0124
+              ],
+              "share_of_total": 0.098
+            },
+            "CTRL": {
+              "est": 0.0078,
+              "ci95": [
+                0.0034,
+                0.0123
+              ],
+              "share_of_total": 0.09
+            },
+            "DHF": {
+              "est": 0.0099,
+              "ci95": [
+                0.0067,
+                0.0131
+              ],
+              "share_of_total": 0.085
+            },
+            "L-A": {
+              "est": 0.0104,
+              "ci95": [
+                0.0051,
+                0.0158
+              ],
+              "share_of_total": 0.124
+            },
+            "L-H": {
+              "est": 0.0122,
+              "ci95": [
+                0.0059,
+                0.0185
+              ],
+              "share_of_total": 0.128
+            },
+            "L-D": {
+              "est": 0.0101,
+              "ci95": [
+                0.0044,
+                0.0158
+              ],
+              "share_of_total": 0.154
+            }
+          },
+          "qt_corrected": {
+            "LVSD": {
+              "est": 0.0101,
+              "ci95": [
+                0.007,
+                0.0132
+              ],
+              "share_of_total": 0.055
+            },
+            "AF": {
+              "est": 0.0053,
+              "ci95": [
+                0.0035,
+                0.0071
+              ],
+              "share_of_total": 0.054
+            },
+            "CTRL": {
+              "est": 0.005,
+              "ci95": [
+                0.002,
+                0.0081
+              ],
+              "share_of_total": 0.057
+            },
+            "DHF": {
+              "est": 0.0076,
+              "ci95": [
+                0.0054,
+                0.0098
+              ],
+              "share_of_total": 0.065
+            },
+            "L-A": {
+              "est": 0.0048,
+              "ci95": [
+                0.0016,
+                0.008
+              ],
+              "share_of_total": 0.057
+            },
+            "L-H": {
+              "est": 0.0051,
+              "ci95": [
+                0.0009,
+                0.0093
+              ],
+              "share_of_total": 0.053
+            },
+            "L-D": {
+              "est": 0.0025,
+              "ci95": [
+                -0.0011,
+                0.0062
+              ],
+              "share_of_total": 0.038
+            }
+          },
+          "waveform": {
+            "LVSD": {
+              "est": 0.1521,
+              "ci95": [
+                0.1247,
+                0.1795
+              ],
+              "share_of_total": 0.833
+            },
+            "AF": {
+              "est": 0.0841,
+              "ci95": [
+                0.0658,
+                0.1023
+              ],
+              "share_of_total": 0.856
+            },
+            "CTRL": {
+              "est": 0.0743,
+              "ci95": [
+                0.0459,
+                0.1027
+              ],
+              "share_of_total": 0.851
+            },
+            "DHF": {
+              "est": 0.0987,
+              "ci95": [
+                0.0776,
+                0.1197
+              ],
+              "share_of_total": 0.843
+            },
+            "L-A": {
+              "est": 0.0681,
+              "ci95": [
+                0.0369,
+                0.0992
+              ],
+              "share_of_total": 0.806
+            },
+            "L-H": {
+              "est": 0.0778,
+              "ci95": [
+                0.0403,
+                0.1153
+              ],
+              "share_of_total": 0.816
+            },
+            "L-D": {
+              "est": 0.0535,
+              "ci95": [
+                0.0216,
+                0.0853
+              ],
+              "share_of_total": 0.814
+            }
+          }
+        },
+        "largest_gap_between_sum_of_parts_and_total": 2.33e-09
+      },
+      "pr_missing_share": {
+        "AF": 0.0015,
+        "CTRL": 0.0014,
+        "DHF": 0.0005,
+        "LVSD": 0.0022
+      }
+    },
+    "heedb": {
+      "primary_model": {
+        "parts": {
+          "total": {
+            "LVSD": {
+              "est": 0.1363,
+              "ci95": [
+                0.1124,
+                0.1601
+              ]
+            },
+            "AF": {
+              "est": 0.0766,
+              "ci95": [
+                0.0642,
+                0.089
+              ]
+            },
+            "CTRL": {
+              "est": 0.055,
+              "ci95": [
+                0.0389,
+                0.071
+              ]
+            },
+            "L-A": {
+              "est": 0.0597,
+              "ci95": [
+                0.0359,
+                0.0834
+              ]
+            },
+            "L-H": {
+              "est": 0.0813,
+              "ci95": [
+                0.054,
+                0.1086
+              ]
+            }
+          },
+          "ventricular_rate": {
+            "LVSD": {
+              "est": 0.0026,
+              "ci95": [
+                0.0003,
+                0.0049
+              ],
+              "share_of_total": 0.019
+            },
+            "AF": {
+              "est": 0.0006,
+              "ci95": [
+                -0.0006,
+                0.0018
+              ],
+              "share_of_total": 0.008
+            },
+            "CTRL": {
+              "est": -0.0003,
+              "ci95": [
+                -0.0019,
+                0.0012
+              ],
+              "share_of_total": -0.006
+            },
+            "L-A": {
+              "est": 0.0019,
+              "ci95": [
+                -0.0004,
+                0.0043
+              ],
+              "share_of_total": 0.033
+            },
+            "L-H": {
+              "est": 0.0029,
+              "ci95": [
+                0.0002,
+                0.0056
+              ],
+              "share_of_total": 0.036
+            }
+          },
+          "waveform": {
+            "LVSD": {
+              "est": 0.1337,
+              "ci95": [
+                0.1104,
+                0.157
+              ],
+              "share_of_total": 0.981
+            },
+            "AF": {
+              "est": 0.076,
+              "ci95": [
+                0.0639,
+                0.088
+              ],
+              "share_of_total": 0.992
+            },
+            "CTRL": {
+              "est": 0.0553,
+              "ci95": [
+                0.0397,
+                0.0709
+              ],
+              "share_of_total": 1.006
+            },
+            "L-A": {
+              "est": 0.0577,
+              "ci95": [
+                0.0344,
+                0.081
+              ],
+              "share_of_total": 0.967
+            },
+            "L-H": {
+              "est": 0.0784,
+              "ci95": [
+                0.0517,
+                0.105
+              ],
+              "share_of_total": 0.964
+            }
+          }
+        },
+        "largest_gap_between_sum_of_parts_and_total": 5.05e-10
+      },
+      "r8_model": {
+        "parts": {
+          "total": {
+            "LVSD": {
+              "est": 0.1336,
+              "ci95": [
+                0.11,
+                0.1573
+              ]
+            },
+            "AF": {
+              "est": 0.0736,
+              "ci95": [
+                0.0616,
+                0.0856
+              ]
+            },
+            "CTRL": {
+              "est": 0.053,
+              "ci95": [
+                0.0371,
+                0.069
+              ]
+            },
+            "DHF": {
+              "est": 0.0621,
+              "ci95": [
+                0.0411,
+                0.0832
+              ]
+            },
+            "L-A": {
+              "est": 0.06,
+              "ci95": [
+                0.0362,
+                0.0839
+              ]
+            },
+            "L-H": {
+              "est": 0.0806,
+              "ci95": [
+                0.0533,
+                0.1079
+              ]
+            },
+            "L-D": {
+              "est": 0.0715,
+              "ci95": [
+                0.0414,
+                0.1016
+              ]
+            }
+          },
+          "ventricular_rate": {
+            "LVSD": {
+              "est": 0.0025,
+              "ci95": [
+                0.0002,
+                0.0048
+              ],
+              "share_of_total": 0.019
+            },
+            "AF": {
+              "est": 0.0005,
+              "ci95": [
+                -0.0007,
+                0.0017
+              ],
+              "share_of_total": 0.007
+            },
+            "CTRL": {
+              "est": -0.0003,
+              "ci95": [
+                -0.0018,
+                0.0013
+              ],
+              "share_of_total": -0.005
+            },
+            "DHF": {
+              "est": -0.0011,
+              "ci95": [
+                -0.0033,
+                0.0011
+              ],
+              "share_of_total": -0.017
+            },
+            "L-A": {
+              "est": 0.002,
+              "ci95": [
+                -0.0004,
+                0.0044
+              ],
+              "share_of_total": 0.033
+            },
+            "L-H": {
+              "est": 0.0028,
+              "ci95": [
+                0.0001,
+                0.0055
+              ],
+              "share_of_total": 0.035
+            },
+            "L-D": {
+              "est": 0.0036,
+              "ci95": [
+                0.0006,
+                0.0066
+              ],
+              "share_of_total": 0.05
+            }
+          },
+          "waveform": {
+            "LVSD": {
+              "est": 0.1311,
+              "ci95": [
+                0.108,
+                0.1542
+              ],
+              "share_of_total": 0.981
+            },
+            "AF": {
+              "est": 0.0731,
+              "ci95": [
+                0.0614,
+                0.0847
+              ],
+              "share_of_total": 0.993
+            },
+            "CTRL": {
+              "est": 0.0533,
+              "ci95": [
+                0.0378,
+                0.0688
+              ],
+              "share_of_total": 1.005
+            },
+            "DHF": {
+              "est": 0.0632,
+              "ci95": [
+                0.0425,
+                0.0839
+              ],
+              "share_of_total": 1.017
+            },
+            "L-A": {
+              "est": 0.058,
+              "ci95": [
+                0.0347,
+                0.0814
+              ],
+              "share_of_total": 0.967
+            },
+            "L-H": {
+              "est": 0.0778,
+              "ci95": [
+                0.0511,
+                0.1044
+              ],
+              "share_of_total": 0.965
+            },
+            "L-D": {
+              "est": 0.0679,
+              "ci95": [
+                0.0383,
+                0.0975
+              ],
+              "share_of_total": 0.95
+            }
+          }
+        },
+        "largest_gap_between_sum_of_parts_and_total": 5.2e-10
+      },
+      "pr_missing_share": null
+    }
+  },
+  "R11": {
+    "mimic": {
+      "AF": {
+        "entered": {
+          "patients": 2006,
+          "age_median_iqr": [
+            73.0,
+            64.0,
+            82.0
+          ],
+          "men_pct": 53.5
+        },
+        "removed_by_ecg_rules": {
+          "patients": 24856,
+          "age_median_iqr": [
+            76.0,
+            66.0,
+            84.0
+          ],
+          "men_pct": 56.1
+        },
+        "standardized_difference": {
+          "age": -0.161,
+          "men": -0.052
+        },
+        "entered_pct": 7.5
+      },
+      "CTRL": {
+        "entered": {
+          "patients": 534,
+          "age_median_iqr": [
+            73.0,
+            61.0,
+            83.0
+          ],
+          "men_pct": 32.0
+        },
+        "removed_by_ecg_rules": {
+          "patients": 11067,
+          "age_median_iqr": [
+            60.0,
+            42.0,
+            76.0
+          ],
+          "men_pct": 45.4
+        },
+        "standardized_difference": {
+          "age": 0.691,
+          "men": -0.278
+        },
+        "entered_pct": 4.6
+      },
+      "LVSD": {
+        "entered": {
+          "patients": 557,
+          "age_median_iqr": [
+            69.0,
+            60.0,
+            79.0
+          ],
+          "men_pct": 62.5
+        },
+        "removed_by_ecg_rules": {
+          "patients": 5906,
+          "age_median_iqr": [
+            69.0,
+            59.0,
+            79.0
+          ],
+          "men_pct": 62.2
+        },
+        "standardized_difference": {
+          "age": 0.017,
+          "men": 0.005
+        },
+        "entered_pct": 8.6
+      },
+      "DHF": {
+        "entered": {
+          "patients": 743,
+          "age_median_iqr": [
+            73.0,
+            62.0,
+            82.0
+          ],
+          "men_pct": 40.1
+        },
+        "removed_by_ecg_rules": {
+          "patients": 5319,
+          "age_median_iqr": [
+            74.0,
+            64.0,
+            83.0
+          ],
+          "men_pct": 43.4
+        },
+        "standardized_difference": {
+          "age": -0.071,
+          "men": -0.066
+        },
+        "entered_pct": 12.3
+      },
+      "AS": {
+        "entered": {
+          "patients": 106,
+          "age_median_iqr": [
+            77.5,
+            69.0,
+            84.0
+          ],
+          "men_pct": 56.6
+        },
+        "removed_by_ecg_rules": {
+          "patients": 997,
+          "age_median_iqr": [
+            76.0,
+            69.0,
+            84.0
+          ],
+          "men_pct": 56.2
+        },
+        "standardized_difference": {
+          "age": 0.105,
+          "men": 0.009
+        },
+        "entered_pct": 9.6
+      }
+    },
+    "heedb": {
+      "AF": {
+        "entered": {
+          "patients": 6866,
+          "age_median_iqr": [
+            70.1,
+            62.3,
+            75.9
+          ],
+          "men_pct": 60.6
+        },
+        "removed_by_ecg_rules": {
+          "patients": 28702,
+          "age_median_iqr": [
+            68.7,
+            59.6,
+            75.8
+          ],
+          "men_pct": 55.9
+        },
+        "standardized_difference": {
+          "age": 0.109,
+          "men": 0.096
+        },
+        "entered_pct": 19.3
+      },
+      "CTRL": {
+        "entered": {
+          "patients": 2357,
+          "age_median_iqr": [
+            66.7,
+            56.6,
+            74.1
+          ],
+          "men_pct": 37.3
+        },
+        "removed_by_ecg_rules": {
+          "patients": 18273,
+          "age_median_iqr": [
+            61.3,
+            50.7,
+            71.0
+          ],
+          "men_pct": 35.3
+        },
+        "standardized_difference": {
+          "age": 0.275,
+          "men": 0.041
+        },
+        "entered_pct": 11.4
+      },
+      "LVSD": {
+        "entered": {
+          "patients": 1177,
+          "age_median_iqr": [
+            68.5,
+            58.6,
+            75.4
+          ],
+          "men_pct": 58.5
+        },
+        "removed_by_ecg_rules": {
+          "patients": 5258,
+          "age_median_iqr": [
+            64.4,
+            53.8,
+            73.4
+          ],
+          "men_pct": 55.3
+        },
+        "standardized_difference": {
+          "age": 0.213,
+          "men": 0.066
+        },
+        "entered_pct": 18.3
+      },
+      "DHF": {
+        "entered": {
+          "patients": 1144,
+          "age_median_iqr": [
+            70.6,
+            62.8,
+            76.7
+          ],
+          "men_pct": 46.2
+        },
+        "removed_by_ecg_rules": {
+          "patients": 4045,
+          "age_median_iqr": [
+            68.9,
+            59.1,
+            76.5
+          ],
+          "men_pct": 42.7
+        },
+        "standardized_difference": {
+          "age": 0.159,
+          "men": 0.069
+        },
+        "entered_pct": 22.0
+      },
+      "AS": {
+        "entered": {
+          "patients": 1312,
+          "age_median_iqr": [
+            70.1,
+            60.9,
+            76.1
+          ],
+          "men_pct": 62.3
+        },
+        "removed_by_ecg_rules": {
+          "patients": 4452,
+          "age_median_iqr": [
+            70.6,
+            61.6,
+            77.2
+          ],
+          "men_pct": 55.8
+        },
+        "standardized_difference": {
+          "age": -0.056,
+          "men": 0.134
+        },
+        "entered_pct": 22.8
+      }
+    }
+  }
+}
