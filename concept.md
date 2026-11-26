@@ -1,6 +1,6 @@
 # RISE-SPEC — Is AI-ECG "early detection" target-specific within the same patient?
 
-Status: concept / pre-registration draft · v2.4 · 2026-11-26 (change log: §11)
+Status: concept / pre-registration draft · v2.5 · 2026-11-26 (change log: §11)
 Scope rule: minimum design that answers one question. Anything not listed here goes to §9 and needs an explicit decision before it is added.
 
 ## 1. Thesis
@@ -185,6 +185,8 @@ These were designed after the results were seen, in a critical review of the des
   - **Gate (same script and date):** HEEDB 1,312 (MGH 1,042, Emory 270): pass. MIMIC 106: fail. As in §6.7 item 9, where the gate fails the analysis is descriptive only: in HEEDB the contrasts get classes and a reading; in MIMIC β_AS and the contrasts are reported with CIs and without a class. (With ICD-9 424.1 included the counts would be 2,150 and 202; MIMIC fails either way.)
   - **Model and report:** AS is added to the R8 model as a fifth group; both models. Reported: β_AS, LVSD−AS, AS−AF and AS−LIMBFX.
   - **Reading:** AS is a cardiac comparator that can itself lead to LVSD, like AF (§8); it is not a negative control. LVSD−AS `>` extends the steeper rise to a valve disease; `≡` or `?` limits the statement to the comparators for which `>` holds. No AS-specific model is used (§9 unchanged).
+- **R10 — how much of each slope runs through the tabular inputs? (descriptive; specified 26 Nov 2026 after R8–R9, before running it):** EchoNext-Mini only (DeepECG-SL has no tabular input). The tabular inputs enter the final linear layer, so the logit is a sum: logit = waveform part + Σ_k w_k·z_k, with w_k the final-layer weight of the LVEF ≤45% output and z_k the scaled input. Per ECG, the part of input k is w_k·z_k for ventricular rate, PR, QRS and QTc (atrial rate is 0 in both sources; sex and the frozen age are constant within a patient); the waveform part is the logit minus these four. The primary model (§6.4) and the R8 model (with DHF) are refitted with each part as the outcome. Because the regressors are the same, the slopes of the parts add up exactly to the slope of the score. In HEEDB only ventricular rate varies (PR, QRS and QTc are held constant, §6.7). Reported, per group and for LVSD−AF, LVSD−LIMBFX and LVSD−DHF: the slope of each part with its 95% CI and its share of the total; no classes. Missing PR is entered as 0 by the released pipeline, so the PR part includes changes in whether PR was measured. Numerical check of the additivity on 500 random MIMIC cohort ECGs (seed 20261126): rescoring with the four inputs replaced by the training medians must change the logit by Σ_k w_k·Δz_k; the largest absolute deviation is reported. Reading: a rise that runs through ventricular rate reflects the patient's state at the recording (for example tachycardia near an encounter); the waveform part is the part that comes from the ECG signal itself. Output: `results/robustness_r10_r11.json`.
+- **R11 — who is removed by the ECG rules? (descriptive, outcome-blind; specified with R10):** for each group (LVSD, AF, LIMBFX, DHF, AS) in each data source, among patients who remain after the exclusions that do not depend on ECGs (§6.2 and §6.7: more than one set at the first event, no initial-encounter code, earlier HF or cardiomyopathy code, LVSD code within one year, age, coded history and missing age or sex in HEEDB; for DHF and AS also membership of another group), compare those who entered the analysis with those removed by the ECG rules (no ECG at the anchor, no ECG in the window, fewer than two eligible ECGs or a span below 180 days). Reported: number, age at the anchor (median, IQR), share of men, and standardized differences for age and sex. No score is read.
 
 ## 7. Work packages and gates
 
@@ -242,6 +244,9 @@ These were designed after the results were seen, in a critical review of the des
 - [x] Coverage: by approximate real year, ECGs end around 2019 while admissions run to about 2022; anchors after the ECG period would keep only early-window ECGs. Rule adopted: ≥1 ECG at the anchor admission (§6.2), rather than a calendar cut-off, which is only accurate to about ±1 year. Decided 30 Oct 2026.
 
 ## 11. Change log
+
+v2.5 (26 Nov 2026) — R10 and R11 plan, before running them
+- §6.9: R10 (slope parts through the tabular inputs of EchoNext-Mini) and R11 (patients removed by the ECG rules), both descriptive.
 
 v2.4 (26 Nov 2026) — R8 and R9 done
 - §7: R8 and R9 results recorded.

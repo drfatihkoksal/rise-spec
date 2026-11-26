@@ -20,7 +20,8 @@ patient who is also a DHF patient stays in DHF; the gate uses the counts after t
     python3 -I analysis/29_comparator_counts.py heedb
 
 Output (aggregate only): results/comparator_counts_<db>.json. Waveform checks are cached in work/ (local only).
-mimic() and heedb() also return the patient and ECG lists of the new groups for the analysis script (not written here).
+mimic() and heedb() also return the patient and ECG lists of the new groups, and the anchor rows with their
+exclusion flags, for the analysis scripts (not written here).
 """
 import importlib.util
 import json
@@ -107,6 +108,7 @@ def mimic():
     first_hf = dict(sorted(con.execute(FIRST_HF.format(pid="subject_id", t="admittime, hadm_id", tab="a5")).fetchall()))
     a = pd.concat([con.execute(f"""
         SELECT x.grp, x.subject_id, x.admittime AS anchor,
+          p.anchor_age + year(x.admittime) - p.anchor_year AS age, p.gender = 'M' AS male,
           x.n_sets > 1 AS ex_multi_set,
           x.grp = 'DHF' AND EXISTS (SELECT 1 FROM adm_sets s WHERE s.subject_id = x.subject_id
                                     AND s.admittime < x.admittime AND s.hfcm) AS ex_prior_hf_cm,
@@ -176,14 +178,14 @@ def mimic():
         "lvef_nearest_tte_within_90d_of_anchor": ef, "existing_LVSD_cohort_patients": len(lv),
         "gate": gate(by_grp(own)),
     }, {"patients": own[["grp", "subject_id", "anchor"]], "ecgs": ecgs[["grp", "subject_id", "study_id", "path", "ecg_time"]],
-        "lvef": ef_pat}
+        "lvef": ef_pat, "anchors": a, "entered": final}
 
 
 def heedb():
     c11 = module("11_heedb_cohort")
     con = duckdb.connect()
     con.execute(f"SET temp_directory = '{c11.HEEDB}/duckdb_tmp'; SET memory_limit = '40GB'; SET threads = 24")
-    flows, cands, wins, first_hf = {}, [], [], {}
+    flows, cands, wins, first_hf, anchors = {}, [], [], {}, []
     for site, (name, sexcol) in c11.SITES.items():
         c11.load_site(con, site, sexcol)
         con.execute(f"""
@@ -227,6 +229,7 @@ def heedb():
                        "candidates": by_grp(cand)}
         cands.append(cand)
         wins.append(win)
+        anchors.append(a)
         print(site, "loaded", len(cand), "candidates", len(win), "window ECGs", flush=True)
 
     cand, win = pd.concat(cands, ignore_index=True), pd.concat(wins, ignore_index=True)
@@ -264,7 +267,7 @@ def heedb():
         "final_ecgs_not_in_other_group": by_grp(ecgs),
         "gate": gate(by_grp(own)),
     }, {"patients": own[["site", "grp", "pid", "anchor_d", "dob", "male", "age"]],
-        "ecgs": ecgs[["site", "grp", "pid", "rel", "ecg_time"]]}
+        "ecgs": ecgs[["site", "grp", "pid", "rel", "ecg_time"]], "anchors": pd.concat(anchors, ignore_index=True), "entered": final}
 
 
 if __name__ == "__main__":
