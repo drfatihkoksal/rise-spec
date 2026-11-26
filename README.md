@@ -69,6 +69,8 @@ Run from the repository root, in this order. Each script states its protocol sec
 | Interval agreement | `python3 -I checks/02_interval_agreement.py` | `checks/02_interval_agreement.json` | Supplementary Table S3 |
 | DeepECG-SL load check, scoring, analysis | `analysis/14_deepecg_check.py`, `15_deepecg_score.py`, `16_deepecg_analysis.py` | `results/deepecg_load_check.json`, `results/wp_d_*.json` | Table 2, Figure 2 |
 | Post hoc R1–R6 | `analysis/17_robustness.py` … `21_r6_random_date.py` | `results/robustness_r*.json` | Supplementary Tables S5, S6 |
+| Post hoc R8–R9: patient counts, then comparator groups | `python3 -I analysis/29_comparator_counts.py mimic` and `heedb`, then `analysis/30_r8_r9_comparators.py` | `results/comparator_counts_*.json`, `results/robustness_r8_r9.json` | Table 3, Figure 2, Supplementary Table S10 |
+| Post hoc R10–R11 | `python3 -I analysis/31_r10_r11_parts_and_selection.py` | `results/robustness_r10_r11.json` | Supplementary Tables S11, S12 |
 | Figures | `analysis/22_figure_event_years.py`, `23_flow_diagram.py` | `figures/` | Figures 1–2 |
 
 The gate runs with the pre-specified settings (`01_cohort.py` with the default three-year window and hip
@@ -77,7 +79,7 @@ fracture, then `--window-years 5`) produce `results/wp1_flow_3y_hipfx.json` and 
 Every number in the paper is read from the result files above; the scripts that only format the paper's
 tables and text are not part of this repository.
 
-The full pipeline was run on 30 October 2026 on one workstation (32 CPU cores, one NVIDIA RTX 5090 GPU).
+The full pipeline was run on 30 October 2026 on one workstation (32 CPU cores, one NVIDIA RTX 5090 GPU). The post hoc analyses R8 to R11 were run on 26 November 2026 on the same workstation.
 The scoring steps take the longest; model fitting, figures and tables take minutes.
 
 ## Order of specification
