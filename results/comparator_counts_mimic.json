@@ -1,0 +1,139 @@
+{
+  "run_date": "2026-11-26",
+  "database": "MIMIC-IV",
+  "window_years": 5,
+  "scores_read": false,
+  "first_heart_failure_code_admission_by_type": {
+    "systolic_and_diastolic_codes": 26,
+    "diastolic": 13731,
+    "systolic_or_combined": 12392,
+    "unspecified_or_other": 5220
+  },
+  "first_event_with_set": {
+    "AS": 5838,
+    "AS10": 2543,
+    "DHF": 12117
+  },
+  "ex_multi_set": {
+    "AS": 3099,
+    "AS10": 1371,
+    "DHF": 5009
+  },
+  "anchor_flow": {
+    "start": {
+      "AS": 2739,
+      "AS10": 1172,
+      "DHF": 7108
+    },
+    "ex_prior_hf_cm": {
+      "DHF": 444
+    },
+    "after_ex_prior_hf_cm": {
+      "AS": 2739,
+      "AS10": 1172,
+      "DHF": 6664
+    },
+    "ex_lvsd_within_1y": {
+      "AS": 85,
+      "AS10": 36,
+      "DHF": 320
+    },
+    "after_ex_lvsd_within_1y": {
+      "AS": 2654,
+      "AS10": 1136,
+      "DHF": 6344
+    },
+    "ex_age": {},
+    "after_ex_age": {
+      "AS": 2654,
+      "AS10": 1136,
+      "DHF": 6344
+    },
+    "ex_no_ecg_at_anchor": {
+      "AS": 811,
+      "AS10": 611,
+      "DHF": 2361
+    },
+    "after_ex_no_ecg_at_anchor": {
+      "AS": 1843,
+      "AS10": 525,
+      "DHF": 3983
+    }
+  },
+  "ecg_flow": {
+    "candidates": {
+      "AS": 1843,
+      "AS10": 525,
+      "DHF": 3983
+    },
+    "with_window_ecg": {
+      "DHF": 1775,
+      "AS": 658,
+      "AS10": 246
+    },
+    "final_before_waveform_check": {
+      "AS": 260,
+      "AS10": 127,
+      "DHF": 859
+    },
+    "final_patients": {
+      "AS": 260,
+      "AS10": 126,
+      "DHF": 859
+    }
+  },
+  "final_patients_not_in_other_group": {
+    "AS": 202,
+    "AS10": 106,
+    "DHF": 743
+  },
+  "final_ecgs_not_in_other_group": {
+    "AS": 1225,
+    "AS10": 687,
+    "DHF": 5722
+  },
+  "lvef_nearest_tte_within_90d_of_anchor": {
+    "AS": {
+      "with_tte": 85,
+      "ef_ge50": 80,
+      "ef_lt50": 5,
+      "ef_le45": 4,
+      "median_ef": 63.0
+    },
+    "DHF": {
+      "with_tte": 358,
+      "ef_ge50": 338,
+      "ef_lt50": 20,
+      "ef_le45": 13,
+      "median_ef": 60.0
+    },
+    "AS10": {
+      "with_tte": 58,
+      "ef_ge50": 53,
+      "ef_lt50": 5,
+      "ef_le45": 3,
+      "median_ef": 63.0
+    },
+    "LVSD": {
+      "with_tte": 405,
+      "ef_ge50": 69,
+      "ef_lt50": 336,
+      "ef_le45": 319,
+      "median_ef": 37.0
+    }
+  },
+  "existing_LVSD_cohort_patients": 557,
+  "gate": {
+    "threshold": 500,
+    "counts": {
+      "AS": 202,
+      "AS10": 106,
+      "DHF": 743
+    },
+    "pass": {
+      "AS": false,
+      "AS10": false,
+      "DHF": true
+    }
+  }
+}

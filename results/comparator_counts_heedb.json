@@ -1,0 +1,213 @@
+{
+  "run_date": "2026-11-26",
+  "database": "HEEDB",
+  "window_years": 5,
+  "scores_read": false,
+  "first_heart_failure_code_date_by_type": {
+    "MGH": {
+      "diastolic": 14065,
+      "unspecified_or_other": 19709,
+      "systolic_and_diastolic_codes": 812,
+      "systolic_or_combined": 15227
+    },
+    "Emory": {
+      "diastolic": 10630,
+      "unspecified_or_other": 49649,
+      "systolic_or_combined": 14426,
+      "systolic_and_diastolic_codes": 239
+    }
+  },
+  "sites": {
+    "I0001": {
+      "name": "MGH",
+      "first_event_with_set": {
+        "AS": 20925,
+        "AS10": 13639,
+        "DHF": 12117
+      },
+      "ex_multi_set": {
+        "AS": 2476,
+        "AS10": 1659,
+        "DHF": 2730
+      },
+      "anchor_flow": {
+        "start": {
+          "AS": 18449,
+          "AS10": 11980,
+          "DHF": 9387
+        },
+        "ex_prior_hf_cm": {
+          "DHF": 2012
+        },
+        "after_ex_prior_hf_cm": {
+          "AS": 18449,
+          "AS10": 11980,
+          "DHF": 7375
+        },
+        "ex_lvsd_within_1y": {
+          "AS": 759,
+          "AS10": 565,
+          "DHF": 855
+        },
+        "after_ex_lvsd_within_1y": {
+          "AS": 17690,
+          "AS10": 11415,
+          "DHF": 6520
+        },
+        "ex_lookback_lt_1y": {
+          "AS": 14127,
+          "AS10": 8835,
+          "DHF": 4321
+        },
+        "after_ex_lookback_lt_1y": {
+          "AS": 3563,
+          "AS10": 2580,
+          "DHF": 2199
+        },
+        "ex_age_or_sex_missing": {
+          "AS": 673,
+          "AS10": 525,
+          "DHF": 528
+        },
+        "after_ex_age_or_sex_missing": {
+          "AS": 2890,
+          "AS10": 2055,
+          "DHF": 1671
+        },
+        "ex_no_ecg_at_anchor": {
+          "AS": 564,
+          "AS10": 399,
+          "DHF": 330
+        },
+        "after_ex_no_ecg_at_anchor": {
+          "AS": 2326,
+          "AS10": 1656,
+          "DHF": 1341
+        }
+      },
+      "candidates": {
+        "AS": 2326,
+        "AS10": 1656,
+        "DHF": 1341
+      }
+    },
+    "I0006": {
+      "name": "Emory",
+      "first_event_with_set": {
+        "AS": 33952,
+        "AS10": 7224,
+        "DHF": 13608
+      },
+      "ex_multi_set": {
+        "AS": 1800,
+        "AS10": 578,
+        "DHF": 1091
+      },
+      "anchor_flow": {
+        "start": {
+          "AS": 32152,
+          "AS10": 6646,
+          "DHF": 12517
+        },
+        "ex_prior_hf_cm": {
+          "DHF": 6204
+        },
+        "after_ex_prior_hf_cm": {
+          "AS": 32152,
+          "AS10": 6646,
+          "DHF": 6313
+        },
+        "ex_lvsd_within_1y": {
+          "AS": 2777,
+          "AS10": 964,
+          "DHF": 711
+        },
+        "after_ex_lvsd_within_1y": {
+          "AS": 29375,
+          "AS10": 5682,
+          "DHF": 5602
+        },
+        "ex_lookback_lt_1y": {
+          "AS": 9892,
+          "AS10": 1237,
+          "DHF": 1573
+        },
+        "after_ex_lookback_lt_1y": {
+          "AS": 19483,
+          "AS10": 4445,
+          "DHF": 4029
+        },
+        "ex_age_or_sex_missing": {
+          "AS": 1498,
+          "AS10": 372,
+          "DHF": 305
+        },
+        "after_ex_age_or_sex_missing": {
+          "AS": 17985,
+          "AS10": 4073,
+          "DHF": 3724
+        },
+        "ex_no_ecg_at_anchor": {
+          "AS": 12723,
+          "AS10": 2697,
+          "DHF": 2463
+        },
+        "after_ex_no_ecg_at_anchor": {
+          "AS": 5262,
+          "AS10": 1376,
+          "DHF": 1261
+        }
+      },
+      "candidates": {
+        "AS": 5262,
+        "AS10": 1376,
+        "DHF": 1261
+      }
+    }
+  },
+  "final_before_waveform_check": {
+    "AS": 2444,
+    "AS10": 1530,
+    "DHF": 1261
+  },
+  "final_patients": {
+    "AS": 2444,
+    "AS10": 1530,
+    "DHF": 1261
+  },
+  "final_patients_not_in_other_group": {
+    "AS": 2150,
+    "AS10": 1312,
+    "DHF": 1144
+  },
+  "final_patients_not_in_other_group_by_site": {
+    "I0001": {
+      "AS": 1424,
+      "AS10": 1042,
+      "DHF": 964
+    },
+    "I0006": {
+      "AS": 726,
+      "AS10": 270,
+      "DHF": 180
+    }
+  },
+  "final_ecgs_not_in_other_group": {
+    "AS": 12776,
+    "AS10": 8158,
+    "DHF": 11837
+  },
+  "gate": {
+    "threshold": 500,
+    "counts": {
+      "AS": 2150,
+      "AS10": 1312,
+      "DHF": 1144
+    },
+    "pass": {
+      "AS": true,
+      "AS10": true,
+      "DHF": true
+    }
+  }
+}
