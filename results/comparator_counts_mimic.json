@@ -4,8 +4,8 @@
   "window_years": 5,
   "scores_read": false,
   "first_heart_failure_code_admission_by_type": {
-    "systolic_and_diastolic_codes": 26,
     "diastolic": 13731,
+    "systolic_and_diastolic_codes": 26,
     "systolic_or_combined": 12392,
     "unspecified_or_other": 5220
   },
@@ -100,19 +100,19 @@
       "ef_le45": 4,
       "median_ef": 63.0
     },
-    "DHF": {
-      "with_tte": 358,
-      "ef_ge50": 338,
-      "ef_lt50": 20,
-      "ef_le45": 13,
-      "median_ef": 60.0
-    },
     "AS10": {
       "with_tte": 58,
       "ef_ge50": 53,
       "ef_lt50": 5,
       "ef_le45": 3,
       "median_ef": 63.0
+    },
+    "DHF": {
+      "with_tte": 358,
+      "ef_ge50": 338,
+      "ef_lt50": 20,
+      "ef_le45": 13,
+      "median_ef": 60.0
     },
     "LVSD": {
       "with_tte": 405,

@@ -6,15 +6,15 @@
   "first_heart_failure_code_date_by_type": {
     "MGH": {
       "diastolic": 14065,
-      "unspecified_or_other": 19709,
       "systolic_and_diastolic_codes": 812,
-      "systolic_or_combined": 15227
+      "systolic_or_combined": 15227,
+      "unspecified_or_other": 19709
     },
     "Emory": {
       "diastolic": 10630,
-      "unspecified_or_other": 49649,
+      "systolic_and_diastolic_codes": 239,
       "systolic_or_combined": 14426,
-      "systolic_and_diastolic_codes": 239
+      "unspecified_or_other": 49649
     }
   },
   "sites": {

@@ -20,6 +20,7 @@ patient who is also a DHF patient stays in DHF; the gate uses the counts after t
     python3 -I analysis/29_comparator_counts.py heedb
 
 Output (aggregate only): results/comparator_counts_<db>.json. Waveform checks are cached in work/ (local only).
+mimic() and heedb() also return the patient and ECG lists of the new groups for the analysis script (not written here).
 """
 import importlib.util
 import json
@@ -103,7 +104,7 @@ def mimic():
     CREATE TABLE extra AS SELECT subject_id, hadm_id, {EXTRA} FROM dx GROUP BY ALL;
     CREATE TABLE a5 AS SELECT s.*, x.dhf, x.as_, x.as10, x.hf FROM adm_sets s JOIN extra x USING (subject_id, hadm_id);
     """)
-    first_hf = dict(con.execute(FIRST_HF.format(pid="subject_id", t="admittime, hadm_id", tab="a5")).fetchall())
+    first_hf = dict(sorted(con.execute(FIRST_HF.format(pid="subject_id", t="admittime, hadm_id", tab="a5")).fetchall()))
     a = pd.concat([con.execute(f"""
         SELECT x.grp, x.subject_id, x.admittime AS anchor,
           x.n_sets > 1 AS ex_multi_set,
@@ -122,7 +123,7 @@ def mimic():
     cand = a[keep][["grp", "subject_id", "anchor"]]
     con.register("cand_df", cand)
     win = con.execute(f"""
-    SELECT a.grp, a.subject_id, e.path, e.t AS ecg_time,
+    SELECT a.grp, a.subject_id, e.study_id, e.path, e.t AS ecg_time,
            coalesce(s.sinus, false) AND NOT coalesce(s.bad_quality, false) AS statement_ok
     FROM cand_df a JOIN ecg e USING (subject_id) LEFT JOIN stm s USING (study_id)
     WHERE e.t >= a.anchor - INTERVAL {W} YEAR AND e.t <= a.anchor - INTERVAL 30 DAY
@@ -155,13 +156,13 @@ def mimic():
     c1.echo_anchors(con)
     lv = old.query("cohort == 'primary' and grp == 'LVSD'")[["grp", "subject_id", "anchor"]]
     con.register("ef_df", pd.concat([own[["grp", "subject_id", "anchor"]], lv], ignore_index=True))
-    ef = con.execute("""
+    ef_pat = con.execute("""
     WITH n AS (SELECT p.grp, p.subject_id, t.ef, row_number() OVER (PARTITION BY p.grp, p.subject_id
                       ORDER BY abs(date_diff('second', p.anchor, t.t))) rn
                FROM ef_df p JOIN tte t USING (subject_id) WHERE t.t BETWEEN p.anchor - INTERVAL 90 DAY AND p.anchor + INTERVAL 90 DAY)
-    SELECT grp, count(*) with_tte, count(*) FILTER (WHERE ef >= 50) ef_ge50, count(*) FILTER (WHERE ef < 50) ef_lt50,
-           count(*) FILTER (WHERE ef <= 45) ef_le45, round(median(ef), 1) median_ef
-    FROM n WHERE rn = 1 GROUP BY 1""").df().set_index("grp").to_dict(orient="index")
+    SELECT grp, subject_id, ef FROM n WHERE rn = 1""").df()
+    ef = {g: {"with_tte": int(len(v)), "ef_ge50": int((v >= 50).sum()), "ef_lt50": int((v < 50).sum()),
+              "ef_le45": int((v <= 45).sum()), "median_ef": round(float(v.median()), 1)} for g, v in ef_pat.groupby("grp").ef}
 
     return {
         "run_date": str(date.today()), "database": "MIMIC-IV", "window_years": W, "scores_read": False,
@@ -174,7 +175,8 @@ def mimic():
         "final_patients_not_in_other_group": by_grp(own), "final_ecgs_not_in_other_group": by_grp(ecgs),
         "lvef_nearest_tte_within_90d_of_anchor": ef, "existing_LVSD_cohort_patients": len(lv),
         "gate": gate(by_grp(own)),
-    }
+    }, {"patients": own[["grp", "subject_id", "anchor"]], "ecgs": ecgs[["grp", "subject_id", "study_id", "path", "ecg_time"]],
+        "lvef": ef_pat}
 
 
 def heedb():
@@ -196,11 +198,11 @@ def heedb():
         WHERE d IS NOT NULL AND (regexp_matches(c, '^(I50|I42|I48|I350|I352|S42|S52|S62|S72|S82|S92)')
                                  OR regexp_matches(c, '^(428|425|4273|4241|81|82)'))
         GROUP BY ALL;
-        CREATE OR REPLACE TABLE pat AS SELECT pid, any_value(dob) dob, bool_or(sex_known) sex_known FROM meta GROUP BY 1;
+        CREATE OR REPLACE TABLE pat AS SELECT pid, any_value(dob) dob, any_value(male) male, bool_or(sex_known) sex_known FROM meta GROUP BY 1;
         """)
-        first_hf[name] = dict(con.execute(FIRST_HF.format(pid="pid", t="d", tab="d5")).fetchall())
+        first_hf[name] = dict(sorted(con.execute(FIRST_HF.format(pid="pid", t="d", tab="d5")).fetchall()))
         a = pd.concat([con.execute(f"""
-            SELECT '{site}' site, x.grp, x.pid, x.d AS anchor_d,
+            SELECT '{site}' site, x.grp, x.pid, x.d AS anchor_d, p.dob, p.male, date_diff('day', p.dob, x.d) / 365.25 AS age,
               x.n_sets > 1 AS ex_multi_set,
               x.grp = 'DHF' AND EXISTS (SELECT 1 FROM d5 s WHERE s.pid = x.pid AND s.d < x.d AND s.hfcm) AS ex_prior_hf_cm,
               EXISTS (SELECT 1 FROM d5 s WHERE s.pid = x.pid AND s.lvsd AND s.d > x.d AND s.d <= x.d + INTERVAL 365 DAY) AS ex_lvsd_within_1y,
@@ -213,7 +215,7 @@ def heedb():
         with_set, multi = by_grp(a), by_grp(a[a.ex_multi_set])
         a = a[~a.ex_multi_set].reset_index(drop=True)
         fl, keep = flow(a, ["ex_prior_hf_cm", "ex_lvsd_within_1y", "ex_lookback_lt_1y", "ex_age_or_sex_missing", "ex_no_ecg_at_anchor"])
-        cand = a[keep][["site", "grp", "pid", "anchor_d"]]
+        cand = a[keep][["site", "grp", "pid", "anchor_d", "dob", "male", "age"]]
         con.register("cand_df", cand)
         win = con.execute(f"""
         SELECT c.site, c.grp, c.pid, m.rel, m.t AS ecg_time,
@@ -261,14 +263,15 @@ def heedb():
         "final_patients_not_in_other_group_by_site": {s: by_grp(g) for s, g in own.groupby("site")},
         "final_ecgs_not_in_other_group": by_grp(ecgs),
         "gate": gate(by_grp(own)),
-    }
+    }, {"patients": own[["site", "grp", "pid", "anchor_d", "dob", "male", "age"]],
+        "ecgs": ecgs[["site", "grp", "pid", "rel", "ecg_time"]]}
 
 
 if __name__ == "__main__":
     db = sys.argv[1] if len(sys.argv) > 1 else ""
     if db not in ("mimic", "heedb"):
         sys.exit(__doc__)
-    res = mimic() if db == "mimic" else heedb()
+    res, _ = mimic() if db == "mimic" else heedb()
     RESULTS.mkdir(exist_ok=True)
     (RESULTS / f"comparator_counts_{db}.json").write_text(json.dumps(res, indent=2, default=int))
     print(json.dumps(res, indent=2, default=int))
